@@ -1,0 +1,235 @@
+{
+  "version": "free-models.v1",
+  "generated": "2026-10-28",
+  "note": "Live-pulled free/everlasting model DB for fleet rotation. openrouter_free pool is 50 req/day SHARED across opencode+cline+aider (same key). gemini_direct + cohere are separate pools. Rotate within a pool; across pools on pool-exhaustion. See reference_model_economy + economy.mjs.",
+  "pools": {
+    "openrouter_free": {
+      "providers": [
+        "opencode",
+        "cline",
+        "aider"
+      ],
+      "daily_limit": 50,
+      "shared": true,
+      "endpoint": "https://openrouter.ai/api/v1/models",
+      "model_prefix": "openrouter/",
+      "count": 19,
+      "models": [
+        {
+          "id": "cohere/north-mini-code:free",
+          "ctx": 256000
+        },
+        {
+          "id": "dots-studio/dots-3-note-preview:free",
+          "ctx": 512000
+        },
+        {
+          "id": "google/gemma-4-26b-a4b-it:free",
+          "ctx": 262144
+        },
+        {
+          "id": "google/gemma-4-31b-it:free",
+          "ctx": 262144
+        },
+        {
+          "id": "google/lyria-3-clip-preview",
+          "ctx": 1048576
+        },
+        {
+          "id": "google/lyria-3-pro-preview",
+          "ctx": 1048576
+        },
+        {
+          "id": "liquid/lfm-2.5-2.6b:free",
+          "ctx": 65536
+        },
+        {
+          "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+          "ctx": 256000
+        },
+        {
+          "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+          "ctx": 1000000
+        },
+        {
+          "id": "nvidia/nemotron-3.5-content-safety:free",
+          "ctx": 128000
+        },
+        {
+          "id": "nvidia/nemotron-3.5-lightning:free",
+          "ctx": 1000000
+        },
+        {
+          "id": "nvidia/nemotron-3.5-super-vl:free",
+          "ctx": 1000000
+        },
+        {
+          "id": "openrouter/free",
+          "ctx": 200000
+        },
+        {
+          "id": "poolside/laguna-s-2.1:free",
+          "ctx": 262144
+        },
+        {
+          "id": "poolside/laguna-xs-2.1:free",
+          "ctx": 262144
+        },
+        {
+          "id": "recursive/flint-v1.0:free",
+          "ctx": 262144
+        },
+        {
+          "id": "thinkingmachines/inkling-small:free",
+          "ctx": 1048576
+        },
+        {
+          "id": "thinkingmachines/inkling:free",
+          "ctx": 1048576
+        },
+        {
+          "id": "xingchen-agi/xing4.0-29b-a4b:free",
+          "ctx": 262144
+        }
+      ]
+    },
+    "gemini_direct": {
+      "providers": [
+        "opencode",
+        "cline",
+        "aider",
+        "crush"
+      ],
+      "daily_limit": null,
+      "shared": false,
+      "endpoint": "https://generativelanguage.googleapis.com/v1beta/models",
+      "model_prefix": "gemini/",
+      "count": 17,
+      "models": [
+        {
+          "id": "gemini-2.5-computer-use-preview-10-2025"
+        },
+        {
+          "id": "gemini-2.5-flash"
+        },
+        {
+          "id": "gemini-2.5-flash-lite"
+        },
+        {
+          "id": "gemini-2.5-pro"
+        },
+        {
+          "id": "gemini-3-flash-preview"
+        },
+        {
+          "id": "gemini-3.1-flash-lite"
+        },
+        {
+          "id": "gemini-3.1-flash-lite-preview"
+        },
+        {
+          "id": "gemini-3.1-pro-preview"
+        },
+        {
+          "id": "gemini-3.1-pro-preview-customtools"
+        },
+        {
+          "id": "gemini-3.5-flash"
+        },
+        {
+          "id": "gemini-3.5-flash-lite"
+        },
+        {
+          "id": "gemini-3.6-flash"
+        },
+        {
+          "id": "gemini-3.7-flash"
+        },
+        {
+          "id": "gemini-3.8-flash"
+        },
+        {
+          "id": "gemini-4-argon"
+        },
+        {
+          "id": "gemma-4-26b-a4b-it"
+        },
+        {
+          "id": "gemma-4-31b-it"
+        }
+      ]
+    },
+    "cohere_trial": {
+      "providers": [
+        "opencode",
+        "aider"
+      ],
+      "monthly_limit": 1000,
+      "shared": false,
+      "endpoint": "https://api.cohere.com/v1/models",
+      "model_prefix": "cohere/",
+      "count": 17,
+      "models": [
+        {
+          "id": "c4ai-aya-expanse-32b"
+        },
+        {
+          "id": "c4ai-aya-vision-32b"
+        },
+        {
+          "id": "command-a-03-2025"
+        },
+        {
+          "id": "command-a-plus-05-2026"
+        },
+        {
+          "id": "command-a-reasoning-08-2025"
+        },
+        {
+          "id": "command-a-translate-08-2025"
+        },
+        {
+          "id": "command-a-vision-07-2025"
+        },
+        {
+          "id": "command-r-08-2024"
+        },
+        {
+          "id": "command-r-plus-08-2024"
+        },
+        {
+          "id": "command-r7b-12-2024"
+        },
+        {
+          "id": "command-r7b-arabic-02-2025"
+        },
+        {
+          "id": "north-mini-code-1.0"
+        },
+        {
+          "id": "north-small-translate-1.0"
+        },
+        {
+          "id": "tiny-aya-earth"
+        },
+        {
+          "id": "tiny-aya-fire"
+        },
+        {
+          "id": "tiny-aya-global"
+        },
+        {
+          "id": "tiny-aya-water"
+        }
+      ]
+    },
+    "agy_antigravity": {
+      "providers": [
+        "agy"
+      ],
+      "metered": true,
+      "note": "own metered quota; 429 => choke --pool; ~5-day reset",
+      "models": []
+    }
+  }
+}

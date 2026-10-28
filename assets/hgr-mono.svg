@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="HGR mark (monochrome)">
+  <title>HGR mark — monochrome</title>
+  <!-- single-colour stamp: inherits currentColor; set color via CSS or fill on the <svg> -->
+  <g fill="currentColor" stroke="currentColor">
+    <path d="M20 74 Q60 118 100 74 Q60 97 20 74 Z" stroke="none"/>
+    <g fill="none" stroke-linecap="round">
+      <path d="M60 90 C57 72 58 54 60 40" stroke-width="5.2"/>
+      <path d="M50 87 C46 74 46 60 47 48" stroke-width="4.2"/>
+      <path d="M70 87 C74 74 74 60 73 48" stroke-width="4.2"/>
+      <path d="M47 61 C55 57 65 57 73 61" stroke-width="4"/>
+    </g>
+    <path d="M47 67 C37 65 30 71 30 80 C40 79 47 74 47 67 Z" stroke="none"/>
+    <path d="M73 67 C83 65 90 71 90 80 C80 79 73 74 73 67 Z" stroke="none"/>
+    <path d="M60 12 C51 22 51 32 60 41 C69 32 69 22 60 12 Z" stroke="none"/>
+    <path d="M60 41 C50 38 43 30 43 20 C53 23 59 31 60 41 Z" stroke="none"/>
+    <path d="M60 41 C70 38 77 30 77 20 C67 23 61 31 60 41 Z" stroke="none"/>
+    <circle cx="60" cy="30" r="3" stroke="none"/>
+  </g>
+</svg>

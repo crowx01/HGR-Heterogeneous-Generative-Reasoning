@@ -1,0 +1,4 @@
+.DS_Store
+*.log
+ledger.*.json
+!engine/ledger.template.json

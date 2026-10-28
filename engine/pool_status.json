@@ -1,0 +1,162 @@
+{
+  "generated": "2026-10-28T17:06:12.799Z",
+  "pools": {
+    "cohere_trial": {
+      "status": "UP",
+      "note": "verified working this session; ~1000/mo trial",
+      "rank": 0
+    },
+    "gemini_direct": {
+      "status": "UP_THROTTLED",
+      "note": "demand-throttled (503/5m hangs); returns 200 on retry; per-model RPM/RPD, no single daily counter",
+      "rank": 1
+    },
+    "openrouter_free": {
+      "status": "EXHAUSTED",
+      "note": "live 56/50 used, 0 remaining; resets 2026-10-29T00:00:00Z (~6.9h)",
+      "rank": 3
+    },
+    "agy_antigravity": {
+      "status": "DOWN_429",
+      "note": "metered quota 429 RESOURCE_EXHAUSTED; ~5-day reset",
+      "rank": 3
+    }
+  },
+  "roster": [
+    {
+      "id": "opencode/cohere/command-a-03-2025",
+      "intel": 66,
+      "tier": "T3_code",
+      "role": "code",
+      "pool": "cohere_trial",
+      "pstatus": "UP",
+      "prank": 0
+    },
+    {
+      "id": "opencode/google/gemini-3.1-pro-preview",
+      "intel": 90,
+      "tier": "T1_deep",
+      "role": "deep",
+      "pool": "gemini_direct",
+      "pstatus": "UP_THROTTLED",
+      "prank": 1
+    },
+    {
+      "id": "opencode/google/gemini-3.8-flash",
+      "intel": 72,
+      "tier": "T3_code",
+      "role": "code",
+      "pool": "gemini_direct",
+      "pstatus": "UP_THROTTLED",
+      "prank": 1
+    },
+    {
+      "id": "crush/gemini-3.5-flash",
+      "intel": 71,
+      "tier": "T3_code",
+      "role": "code",
+      "pool": "gemini_direct",
+      "pstatus": "UP_THROTTLED",
+      "prank": 1
+    },
+    {
+      "id": "agy/claude-opus-4-6-thinking",
+      "intel": 97,
+      "tier": "T1_deep",
+      "role": "deep",
+      "pool": "agy_antigravity",
+      "pstatus": "DOWN_429",
+      "prank": 3
+    },
+    {
+      "id": "agy/claude-sonnet-4-6",
+      "intel": 92,
+      "tier": "T1_deep",
+      "role": "deep",
+      "pool": "agy_antigravity",
+      "pstatus": "DOWN_429",
+      "prank": 3
+    },
+    {
+      "id": "agy/gpt-oss-120b-medium",
+      "intel": 82,
+      "tier": "T2_strong",
+      "role": "analysis",
+      "pool": "agy_antigravity",
+      "pstatus": "DOWN_429",
+      "prank": 3
+    },
+    {
+      "id": "agy/gemini-3.8-flash-high",
+      "intel": 80,
+      "tier": "T2_strong",
+      "role": "analysis",
+      "pool": "agy_antigravity",
+      "pstatus": "DOWN_429",
+      "prank": 3
+    },
+    {
+      "id": "opencode/nemotron-3-ultra-550b-a55b:free",
+      "intel": 78,
+      "tier": "T2_strong",
+      "role": "analysis",
+      "pool": "openrouter_free",
+      "pstatus": "EXHAUSTED",
+      "prank": 3
+    },
+    {
+      "id": "cline/nemotron-3-ultra-550b-a55b:free",
+      "intel": 77,
+      "tier": "T4_grind",
+      "role": "grind",
+      "pool": "openrouter_free",
+      "pstatus": "EXHAUSTED",
+      "prank": 3
+    },
+    {
+      "id": "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
+      "intel": 77,
+      "tier": "T4_grind",
+      "role": "grind",
+      "pool": "openrouter_free",
+      "pstatus": "EXHAUSTED",
+      "prank": 3
+    },
+    {
+      "id": "agy/gemini-3.8-flash-medium",
+      "intel": 70,
+      "tier": "T3_code",
+      "role": "code",
+      "pool": "agy_antigravity",
+      "pstatus": "DOWN_429",
+      "prank": 3
+    },
+    {
+      "id": "opencode/cohere/north-mini-code:free",
+      "intel": 60,
+      "tier": "T3_code",
+      "role": "code",
+      "pool": "openrouter_free",
+      "pstatus": "EXHAUSTED",
+      "prank": 3
+    },
+    {
+      "id": "agy/gemini-3.8-flash-low",
+      "intel": 55,
+      "tier": "T4_grind",
+      "role": "grind",
+      "pool": "agy_antigravity",
+      "pstatus": "DOWN_429",
+      "prank": 3
+    },
+    {
+      "id": "opencode/gemma-4-31b-it:free",
+      "intel": 50,
+      "tier": "T4_grind",
+      "role": "grind",
+      "pool": "openrouter_free",
+      "pstatus": "EXHAUSTED",
+      "prank": 3
+    }
+  ]
+}

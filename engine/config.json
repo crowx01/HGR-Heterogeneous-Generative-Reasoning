@@ -1,0 +1,60 @@
+{
+  "version": "delegate-fleet.v1",
+  "lanes": {
+    "review-main": {
+      "implementer": "agy",
+      "model": "claude-sonnet-4-6",
+      "readOnly": true
+    },
+    "review-debate": {
+      "implementer": "opencode",
+      "model": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "readOnly": true
+    },
+    "feature": {
+      "implementer": "agy",
+      "model": "claude-sonnet-4-6"
+    },
+    "complex": {
+      "implementer": "agy",
+      "model": "claude-opus-4-6-thinking"
+    },
+    "tests": {
+      "implementer": "opencode",
+      "model": "openrouter/cohere/north-mini-code:free"
+    },
+    "fast": {
+      "implementer": "agy",
+      "model": "gemini-3.8-flash-low"
+    },
+    "ui": {
+      "implementer": "agy",
+      "model": "gemini-3.8-flash-medium"
+    },
+    "grind": {
+      "implementer": "cline",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+    },
+    "patch": {
+      "implementer": "aider",
+      "model": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free"
+    },
+    "deep-free": {
+      "implementer": "opencode",
+      "model": "google/gemini-3.1-pro-preview"
+    },
+    "flash-free": {
+      "implementer": "opencode",
+      "model": "google/gemini-3.8-flash"
+    },
+    "crush": {
+      "implementer": "crush",
+      "model": "gemini/gemini-3.5-flash"
+    },
+    "cohere": {
+      "implementer": "opencode",
+      "model": "cohere/command-a-03-2025"
+    }
+  }
+}

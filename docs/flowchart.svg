@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 880" width="1180" height="880" font-family="'DejaVu Sans','Segoe UI',Arial,sans-serif" role="img" aria-label="HGR orchestration flow">
+  <title>HGR — Heterogeneous Generative Reasoning: orchestration flow</title>
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#0B5D3B"/>
+    </marker>
+    <marker id="arwg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#C9A24B"/>
+    </marker>
+  </defs>
+
+  <!-- ================= main pipeline (centre column) ================= -->
+  <g stroke="#0B5D3B" stroke-width="2.4" fill="none">
+    <line x1="430" y1="78"  x2="430" y2="104" marker-end="url(#arw)"/>
+    <line x1="430" y1="172" x2="430" y2="198" marker-end="url(#arw)"/>
+    <line x1="430" y1="266" x2="430" y2="292" marker-end="url(#arw)"/>
+    <line x1="430" y1="360" x2="430" y2="386" marker-end="url(#arw)"/>
+    <line x1="430" y1="454" x2="430" y2="480" marker-end="url(#arw)"/>
+    <line x1="430" y1="636" x2="430" y2="662" marker-end="url(#arw)"/>
+    <line x1="430" y1="730" x2="430" y2="756" marker-end="url(#arw)"/>
+  </g>
+
+  <!-- GOAL -->
+  <rect x="230" y="20" width="400" height="58" rx="12" fill="#063D27"/>
+  <text x="430" y="47" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">GOAL / OBJECTIVE</text>
+  <text x="430" y="67" text-anchor="middle" fill="#9fd9bd" font-size="12.5">one brief, one success criterion</text>
+
+  <!-- ORCHESTRATOR -->
+  <rect x="200" y="104" width="460" height="68" rx="12" fill="#0B5D3B"/>
+  <text x="430" y="132" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">ORCHESTRATOR — Opus (Harmony Master)</text>
+  <text x="430" y="156" text-anchor="middle" fill="#bfe8d3" font-size="12.5">decompose · route · arbitrate · synthesize · verify — never grinds</text>
+
+  <!-- DECOMPOSE -->
+  <rect x="230" y="198" width="400" height="68" rx="12" fill="#15754A"/>
+  <text x="430" y="226" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">DECOMPOSE → subtasks</text>
+  <text x="430" y="249" text-anchor="middle" fill="#dff1e8" font-size="12.5">each with its own in/out contract + cold self-contained prompt</text>
+
+  <!-- ECONOMY GATE -->
+  <rect x="210" y="292" width="440" height="68" rx="12" fill="#063D27" stroke="#C9A24B" stroke-width="2.5"/>
+  <text x="430" y="320" text-anchor="middle" fill="#C9A24B" font-size="16" font-weight="700">ECONOMY GATE — engine/economy.mjs</text>
+  <text x="430" y="343" text-anchor="middle" fill="#e7d49c" font-size="12.5">pick · spend · choke · status  |  salary ledger + shared quota pools</text>
+
+  <!-- ROUTE by tier -->
+  <rect x="230" y="386" width="400" height="68" rx="12" fill="#15754A"/>
+  <text x="430" y="414" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">ROUTE by intelligence tier</text>
+  <text x="430" y="437" text-anchor="middle" fill="#dff1e8" font-size="12.5">T1 deep → T2 strong → T3 code → T4 grind  (default down)</text>
+
+  <!-- DISPATCH band -->
+  <rect x="120" y="480" width="620" height="156" rx="12" fill="#f3faf6" stroke="#0B5D3B" stroke-width="2"/>
+  <text x="430" y="504" text-anchor="middle" fill="#0B5D3B" font-size="13.5" font-weight="700">DISPATCH — lanes (engine/config.json) → heterogeneous CLIs → models</text>
+  <!-- CLI chips -->
+  <g font-size="12.5" font-weight="700" text-anchor="middle">
+    <rect x="140" y="520" width="108" height="40" rx="9" fill="#0B5D3B"/><text x="194" y="540" fill="#fff">agy</text><text x="194" y="554" fill="#bfe8d3" font-size="10" font-weight="400">claude/gemini</text>
+    <rect x="258" y="520" width="116" height="40" rx="9" fill="#0B5D3B"/><text x="316" y="540" fill="#fff">opencode</text><text x="316" y="554" fill="#bfe8d3" font-size="10" font-weight="400">gemini/cohere</text>
+    <rect x="384" y="520" width="104" height="40" rx="9" fill="#0B5D3B"/><text x="436" y="540" fill="#fff">cline</text><text x="436" y="554" fill="#bfe8d3" font-size="10" font-weight="400">nemotron</text>
+    <rect x="498" y="520" width="104" height="40" rx="9" fill="#0B5D3B"/><text x="550" y="540" fill="#fff">aider</text><text x="550" y="554" fill="#bfe8d3" font-size="10" font-weight="400">openrouter</text>
+    <rect x="612" y="520" width="110" height="40" rx="9" fill="#0B5D3B"/><text x="667" y="540" fill="#fff">crush</text><text x="667" y="554" fill="#bfe8d3" font-size="10" font-weight="400">gemini</text>
+  </g>
+  <!-- consensus note -->
+  <rect x="140" y="574" width="582" height="48" rx="9" fill="#dff1e8"/>
+  <text x="430" y="594" text-anchor="middle" fill="#0B5D3B" font-size="13" font-weight="700">engine/consensus.mjs — parallel fan-out: 1 brief → N lanes → collect result.json</text>
+  <text x="430" y="612" text-anchor="middle" fill="#15754A" font-size="11.5">independent subtasks run concurrently; each relay metered against the ledger</text>
+
+  <!-- VERIFY -->
+  <rect x="230" y="662" width="400" height="68" rx="12" fill="#15754A"/>
+  <text x="430" y="690" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">VERIFY — budget subagent</text>
+  <text x="430" y="713" text-anchor="middle" fill="#dff1e8" font-size="12.5">mechanical check: artifact exists · gates pass · contract/scope match</text>
+
+  <!-- SYNTHESIZE / DELIVER -->
+  <rect x="200" y="756" width="460" height="68" rx="12" fill="#0B5D3B"/>
+  <text x="430" y="784" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">ARBITRATE + SYNTHESIZE → DELIVERABLE</text>
+  <text x="430" y="807" text-anchor="middle" fill="#bfe8d3" font-size="12.5">Opus judges by evidence (not vote count); merges, signs off</text>
+
+  <!-- ================= right-side feedback loop ================= -->
+  <g stroke="#C9A24B" stroke-width="2.6" fill="none" stroke-dasharray="7 5">
+    <path d="M740 558 C 900 558 900 326 652 326" marker-end="url(#arwg)"/>
+  </g>
+  <rect x="820" y="412" width="300" height="86" rx="12" fill="#063D27" stroke="#C9A24B" stroke-width="2"/>
+  <text x="970" y="440" text-anchor="middle" fill="#C9A24B" font-size="14" font-weight="700">CHOKE / 429 → HANDOVER</text>
+  <text x="970" y="461" text-anchor="middle" fill="#e7d49c" font-size="11.5">pool exhausted or salary spent →</text>
+  <text x="970" y="478" text-anchor="middle" fill="#e7d49c" font-size="11.5">next model in handover_to chain,</text>
+  <text x="970" y="495" text-anchor="middle" fill="#e7d49c" font-size="11.5">re-priced at the economy gate</text>
+
+  <!-- ================= right-side DEBATE callout ================= -->
+  <rect x="820" y="150" width="300" height="120" rx="12" fill="#f3faf6" stroke="#0B5D3B" stroke-width="2"/>
+  <text x="970" y="176" text-anchor="middle" fill="#0B5D3B" font-size="14" font-weight="700">ADVERSARIAL DEBATE</text>
+  <text x="970" y="198" text-anchor="middle" fill="#15754A" font-size="11.5">auto-triggered on P2+ / chains /</text>
+  <text x="970" y="214" text-anchor="middle" fill="#15754A" font-size="11.5">reputation-staking claims:</text>
+  <text x="970" y="234" text-anchor="middle" fill="#15754A" font-size="11.5">same evidence → 2–3 models,</text>
+  <text x="970" y="250" text-anchor="middle" fill="#15754A" font-size="11.5">each argues + steelmans the other,</text>
+  <text x="970" y="266" text-anchor="middle" fill="#15754A" font-size="11.5">Opus judges argument quality</text>
+  <g stroke="#0B5D3B" stroke-width="2.2" fill="none" stroke-dasharray="5 4">
+    <path d="M820 210 L 660 138" marker-end="url(#arw)"/>
+  </g>
+</svg>
