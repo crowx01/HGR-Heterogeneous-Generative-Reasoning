@@ -12,6 +12,12 @@ A framework for decomposing a task into subtasks, routing each subtask to a gene
 
 Different models have different costs, capabilities, and quotas. A heterogeneous fleet does more work, cheaper, than a single model, and keeps running when any one provider is rate-limited. When a pool is exhausted the economy hands the subtask to the next model in a fallback chain instead of stalling.
 
+## The Persephone model
+
+HGR takes its name and its mark from Persephone's return, the myth of a world that goes dormant and is brought back to life. The system works the same way. A model pool falls dormant when its quota is spent or a provider rate-limits it, which is the husk in the logo. The orchestrator is the force that brings the work back: it reroutes a choked model to the next in its chain, wakes a different provider, and keeps the task moving so nothing that looked dead stays dead. The bloom rising from the husk is a subtask that had stalled and is now running again on another model.
+
+Each capability maps to a part of the cycle. The economy tracks which pools are dormant and which are in season. Consensus sends one brief out to many models so a single exhausted one never halts the work. Debate brings several minds to a judgment that no one model should be trusted with alone. Verification confirms that what came back is real and not a hollow claim. The through-line is the single idea the mark carries: something that once felt lifeless can become meaningful again.
+
 ## Architecture
 
 <p align="center">
@@ -104,6 +110,10 @@ node engine/consensus.mjs --brief brief.txt --lanes crush,patch,tests --mission 
 - `consensus.mjs` currently hardcodes the config path (`/home/kali/.config/delegate-skills`) and the `~/.claude/skills` relay path. `economy.mjs` defaults the same path but honors `CONFIG_DIR`, `MODELS_FILE`, and `TEMPLATE_FILE`. Make the consensus paths configurable before running it elsewhere.
 - `pool_status.json` and `free_models.json` are snapshots. They record what was true when written, not live state. Re-check a provider before trusting its listed status.
 - Salaries and pool limits in `models.json` are calibrated from observed quota. They need re-calibration per account and over time.
+
+## Acknowledgements
+
+The delegate and debate skills that HGR is built on come from nagdy.
 
 ## License
 
