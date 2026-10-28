@@ -2,3 +2,4 @@
 *.log
 ledger.*.json
 !engine/ledger.template.json
+.aider*
