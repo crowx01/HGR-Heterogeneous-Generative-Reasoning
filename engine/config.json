@@ -55,6 +55,10 @@
     "cohere": {
       "implementer": "opencode",
       "model": "cohere/command-a-03-2025"
+    },
+    "kilo": {
+      "implementer": "kilo",
+      "model": "kilo/~google/gemini-flash-latest"
     }
   }
 }

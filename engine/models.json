@@ -47,6 +47,15 @@
     "deepseek": {
       "status": "dead",
       "source": "balance 0.00"
+    },
+    "kilo_subscription": {
+      "window": "unknown",
+      "limit": "Kilo Code account credits / free tier",
+      "shared_by": [
+        "kilo"
+      ],
+      "source": "kilo auth list (own store ~/.local/share/kilo/auth.json)",
+      "note": "native kilo/ provider, authenticated by `kilo auth login`, NOT env API keys"
     }
   },
   "tiers": {
@@ -287,6 +296,21 @@
         "opencode/cohere/north-mini-code:free"
       ],
       "dispatch": "crush run --quiet -m <model> \"<brief>\" (cwd=target dir; edits files in cwd like opencode; no *-delegate lane)",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "kilo/~google/gemini-flash-latest",
+      "cli": "kilo",
+      "tier": "T4_grind",
+      "intelligence": 45,
+      "role": "grind",
+      "salary_dispatches": 12,
+      "quota_pool": "kilo_subscription",
+      "lane": "kilo",
+      "handover_to": [
+        "opencode/cohere/command-a-03-2025"
+      ],
+      "note": "Kilo Code native provider; requires `kilo auth login` (0 credentials until then, dispatches hand over)",
       "cost_salary_usd": 0.01
     }
   ],

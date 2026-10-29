@@ -20,6 +20,11 @@
       "status": "DOWN_429",
       "note": "metered quota 429 RESOURCE_EXHAUSTED; ~5-day reset",
       "rank": 3
+    },
+    "kilo_subscription": {
+      "status": "UNCONFIGURED",
+      "note": "0 credentials in ~/.local/share/kilo/auth.json; run `kilo auth login` to activate (do not embed env API keys)",
+      "rank": 2
     }
   },
   "roster": [
@@ -157,6 +162,15 @@
       "pool": "openrouter_free",
       "pstatus": "EXHAUSTED",
       "prank": 3
+    },
+    {
+      "id": "kilo/~google/gemini-flash-latest",
+      "intel": 45,
+      "tier": "T4_grind",
+      "role": "grind",
+      "pool": "kilo_subscription",
+      "pstatus": "UNCONFIGURED",
+      "prank": 2
     }
   ]
 }

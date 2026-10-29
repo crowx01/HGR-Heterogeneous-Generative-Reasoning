@@ -4,7 +4,7 @@ Every file under `engine/`, and under each the functions or CLI commands it expo
 
 ## engine/config.json
 
-The lane map. Each lane name maps to an object with `implementer` (which CLI), `model`, and optionally `provider` and `readOnly`. A lane is a named routing slot that binds one CLI to one model. Lanes present: `review-main`, `review-debate`, `feature`, `complex`, `tests`, `fast`, `ui`, `grind`, `patch`, `deep-free`, `flash-free`, `crush`, `cohere`.
+The lane map. Each lane name maps to an object with `implementer` (which CLI), `model`, and optionally `provider` and `readOnly`. A lane is a named routing slot that binds one CLI to one model. Lanes present: `review-main`, `review-debate`, `feature`, `complex`, `tests`, `fast`, `ui`, `grind`, `patch`, `deep-free`, `flash-free`, `crush`, `kilo`, `cohere`.
 
 ## engine/economy.mjs
 
@@ -63,7 +63,7 @@ The test suite for `economy.mjs`. Run it with `node engine/economy.test.mjs`. It
 ## engine/models.json
 
 The model intelligence and salary database, version `model-economy.v3`.
-- `quotas`: one entry per shared pool, with window, limit, shared_by, source, and note. Pools include `openrouter_free` (one 50/day pool shared by opencode, cline, and aider on the same key), `gemini_direct` (Google AI Studio free tier), `cohere_trial` (about 1000/month), `agy_antigravity` (about 10 per 5 days), and `openai` and `deepseek` marked dead.
+- `quotas`: one entry per shared pool, with window, limit, shared_by, source, and note. Pools include `openrouter_free` (one 50/day pool shared by opencode, cline, and aider on the same key), `gemini_direct` (Google AI Studio free tier), `cohere_trial` (about 1000/month), `agy_antigravity` (about 10 per 5 days), `kilo_subscription` (Kilo Code account pool, status UNCONFIGURED until `kilo auth login`), and `openai` and `deepseek` marked dead.
 - `tiers`: `T1_deep`, `T2_strong`, `T3_code`, `T4_grind`, mapped to roles deep, analysis, code, grind.
 - `models`: each with `id`, `cli`, `tier`, `intelligence` (0 to 100), `role`, `salary_dispatches`, `quota_pool`, `lane`, and `handover_to`.
 
