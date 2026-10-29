@@ -48,6 +48,8 @@ On a 429 or an exhausted pool, the model is choked and the subtask hands over to
 
 ## Quickstart
 
+For a step-by-step setup, see [docs/INSTALLATION.md](docs/INSTALLATION.md).
+
 Install Node 18+, then the CLIs you want in the fleet (opencode, aider, cline, agy, crush). Point the engine at its config directory with `CONFIG_DIR` (default `/home/kali/.config/delegate-skills`). Then:
 
 ```
