@@ -1,251 +1,116 @@
 {
   "version": "free-models.v1",
-  "generated": "2026-10-28",
-  "note": "Live-pulled free/everlasting model DB for fleet rotation. openrouter_free pool is 50 req/day SHARED across opencode+cline+aider (same key). gemini_direct + cohere are separate pools. Rotate within a pool; across pools on pool-exhaustion. See reference_model_economy + economy.mjs.",
+  "generated": "2026-10-29T17:04:13.844Z",
+  "note": "Live-probed across keyed providers (OpenRouter/NVIDIA NIM/SambaNova/Cohere/Gemini/Cloudflare) + CLI-native (kilo/agy). Together key dead, DeepInfra pay-per-token, HF/Moonshot/DeepSeek excluded.",
   "pools": {
     "openrouter_free": {
       "providers": [
-        "opencode",
-        "cline",
-        "aider"
+        "opencode"
       ],
-      "daily_limit": 50,
-      "shared": true,
-      "endpoint": "https://openrouter.ai/api/v1/models",
       "model_prefix": "openrouter/",
-      "count": 19,
+      "endpoint": "https://openrouter.ai/api/v1",
+      "count": 16,
       "models": [
         {
-          "id": "cohere/north-mini-code:free",
-          "ctx": 256000
-        },
-        {
-          "id": "dots-studio/dots-3-note-preview:free",
-          "ctx": 512000
-        },
-        {
-          "id": "google/gemma-4-26b-a4b-it:free",
-          "ctx": 262144
-        },
-        {
-          "id": "google/gemma-4-31b-it:free",
-          "ctx": 262144
-        },
-        {
-          "id": "google/lyria-3-clip-preview",
-          "ctx": 1048576
-        },
-        {
-          "id": "google/lyria-3-pro-preview",
-          "ctx": 1048576
-        },
-        {
-          "id": "liquid/lfm-2.5-2.6b:free",
-          "ctx": 65536
-        },
-        {
-          "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-          "ctx": 256000
-        },
-        {
-          "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
-          "ctx": 1000000
-        },
-        {
-          "id": "nvidia/nemotron-3.5-content-safety:free",
-          "ctx": 128000
-        },
-        {
-          "id": "nvidia/nemotron-3.5-lightning:free",
-          "ctx": 1000000
-        },
-        {
-          "id": "nvidia/nemotron-3.5-super-vl:free",
-          "ctx": 1000000
-        },
-        {
-          "id": "openrouter/free",
-          "ctx": 200000
-        },
-        {
-          "id": "poolside/laguna-s-2.1:free",
-          "ctx": 262144
-        },
-        {
-          "id": "poolside/laguna-xs-2.1:free",
-          "ctx": 262144
-        },
-        {
           "id": "recursive/flint-v1.0:free",
-          "ctx": 262144
-        },
-        {
-          "id": "thinkingmachines/inkling-small:free",
-          "ctx": 1048576
-        },
-        {
-          "id": "thinkingmachines/inkling:free",
-          "ctx": 1048576
+          "ctx": 0
         },
         {
           "id": "xingchen-agi/xing4.0-29b-a4b:free",
-          "ctx": 262144
+          "ctx": 0
+        },
+        {
+          "id": "nvidia/nemotron-3.5-super-vl:free",
+          "ctx": 0
+        },
+        {
+          "id": "dots-studio/dots-3-note-preview:free",
+          "ctx": 0
+        },
+        {
+          "id": "liquid/lfm-2.5-2.6b:free",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia/nemotron-3.5-lightning:free",
+          "ctx": 0
+        },
+        {
+          "id": "thinkingmachines/inkling-small:free",
+          "ctx": 0
+        },
+        {
+          "id": "poolside/laguna-s-2.1:free",
+          "ctx": 0
+        },
+        {
+          "id": "thinkingmachines/inkling:free",
+          "ctx": 0
+        },
+        {
+          "id": "poolside/laguna-xs-2.1:free",
+          "ctx": 0
+        },
+        {
+          "id": "cohere/north-mini-code:free",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+          "ctx": 0
+        },
+        {
+          "id": "google/gemma-4-26b-a4b-it:free",
+          "ctx": 0
+        },
+        {
+          "id": "google/gemma-4-31b-it:free",
+          "ctx": 0
+        },
+        {
+          "id": "openrouter/free",
+          "ctx": 0
         }
       ]
-    },
-    "gemini_direct": {
-      "providers": [
-        "opencode",
-        "cline",
-        "aider"
-      ],
-      "daily_limit": null,
-      "shared": false,
-      "endpoint": "https://generativelanguage.googleapis.com/v1beta/models",
-      "model_prefix": "gemini/",
-      "count": 17,
-      "models": [
-        {
-          "id": "gemini-2.5-computer-use-preview-10-2025"
-        },
-        {
-          "id": "gemini-2.5-flash"
-        },
-        {
-          "id": "gemini-2.5-flash-lite"
-        },
-        {
-          "id": "gemini-2.5-pro"
-        },
-        {
-          "id": "gemini-3-flash-preview"
-        },
-        {
-          "id": "gemini-3.1-flash-lite"
-        },
-        {
-          "id": "gemini-3.1-flash-lite-preview"
-        },
-        {
-          "id": "gemini-3.1-pro-preview"
-        },
-        {
-          "id": "gemini-3.1-pro-preview-customtools"
-        },
-        {
-          "id": "gemini-3.5-flash"
-        },
-        {
-          "id": "gemini-3.5-flash-lite"
-        },
-        {
-          "id": "gemini-3.6-flash"
-        },
-        {
-          "id": "gemini-3.7-flash"
-        },
-        {
-          "id": "gemini-3.8-flash"
-        },
-        {
-          "id": "gemini-4-argon"
-        },
-        {
-          "id": "gemma-4-26b-a4b-it"
-        },
-        {
-          "id": "gemma-4-31b-it"
-        }
-      ]
-    },
-    "cohere_trial": {
-      "providers": [
-        "opencode",
-        "aider"
-      ],
-      "monthly_limit": 1000,
-      "shared": false,
-      "endpoint": "https://api.cohere.com/v1/models",
-      "model_prefix": "cohere/",
-      "count": 17,
-      "models": [
-        {
-          "id": "c4ai-aya-expanse-32b"
-        },
-        {
-          "id": "c4ai-aya-vision-32b"
-        },
-        {
-          "id": "command-a-03-2025"
-        },
-        {
-          "id": "command-a-plus-05-2026"
-        },
-        {
-          "id": "command-a-reasoning-08-2025"
-        },
-        {
-          "id": "command-a-translate-08-2025"
-        },
-        {
-          "id": "command-a-vision-07-2025"
-        },
-        {
-          "id": "command-r-08-2024"
-        },
-        {
-          "id": "command-r-plus-08-2024"
-        },
-        {
-          "id": "command-r7b-12-2024"
-        },
-        {
-          "id": "command-r7b-arabic-02-2025"
-        },
-        {
-          "id": "north-mini-code-1.0"
-        },
-        {
-          "id": "north-small-translate-1.0"
-        },
-        {
-          "id": "tiny-aya-earth"
-        },
-        {
-          "id": "tiny-aya-fire"
-        },
-        {
-          "id": "tiny-aya-global"
-        },
-        {
-          "id": "tiny-aya-water"
-        }
-      ]
-    },
-    "agy_antigravity": {
-      "providers": [
-        "agy"
-      ],
-      "metered": true,
-      "note": "own metered quota; 429 => choke --pool; ~5-day reset",
-      "models": []
     },
     "nvidia_nim_free": {
       "providers": [
         "aider"
       ],
-      "daily_limit": null,
-      "shared": false,
-      "endpoint": "https://integrate.api.nvidia.com/v1",
       "model_prefix": "nvidia_nim/",
-      "count": 7,
+      "endpoint": "https://integrate.api.nvidia.com/v1",
+      "count": 62,
       "models": [
         {
-          "id": "nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b",
+          "id": "nvidia_nim/01-ai/yi-large",
           "ctx": 0
         },
         {
-          "id": "nvidia_nim/nvidia/nemotron-3-super-120b-a12b",
+          "id": "nvidia_nim/adept/fuyu-8b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/ai21labs/jamba-1.5-large-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/aisingapore/sea-lion-7b-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/bigcode/starcoder2-15b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/databricks/dbrx-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/deepseek-ai/deepseek-coder-6.7b-instruct",
           "ctx": 0
         },
         {
@@ -253,7 +118,127 @@
           "ctx": 0
         },
         {
+          "id": "nvidia_nim/google/codegemma-1.1-7b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/google/codegemma-7b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/google/deplot",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/google/diffusiongemma-26b-a4b-it",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/google/gemma-2b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/google/gemma-3-12b-it",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/google/gemma-3-4b-it",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/google/gemma-4-31b-it",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/google/recurrentgemma-2b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/ibm/granite-3.0-3b-a800m-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/ibm/granite-3.0-8b-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/ibm/granite-34b-code-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/ibm/granite-8b-code-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/meta/codellama-70b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/meta/llama2-70b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/meta/muse-glimmer-30b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/microsoft/kosmos-2",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/microsoft/phi-3.5-moe-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/minimaxai/minimax-m3.1-flash",
+          "ctx": 0
+        },
+        {
           "id": "nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/mistralai/mistral-7b-instruct-v0.3",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/mistralai/mistral-large",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/mistralai/mistral-large-2-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/mistralai/mistral-large-4-1t-a52b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/mistralai/mixtral-8x22b-v0.1",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/moonshotai/kimi-k2.6",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nv-mistralai/mistral-nemo-12b-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/ai-synthetic-video-detector",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/cosmos-reason2-8b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/ising-calibration-1.5-31b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/llama-3.1-nemotron-51b-instruct",
           "ctx": 0
         },
         {
@@ -261,11 +246,91 @@
           "ctx": 0
         },
         {
-          "id": "nvidia_nim/openai/gpt-oss-20b",
+          "id": "nvidia_nim/nvidia/llama-3.1-nemotron-ultra-253b-v1",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/llama3-chatqa-1.5-70b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/mistral-nemo-minitron-8b-8k-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/nemotron-3-super-120b-a12b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/nemotron-3.5-bolt-e4b",
           "ctx": 0
         },
         {
           "id": "nvidia_nim/nvidia/nemotron-3.5-lightning-30b-a3b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/nemotron-4-340b-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/nemotron-nano-3-30b-a3b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/neva-22b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/vila",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/openai/gpt-oss-20b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/poolside/laguna-xs-2.1",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/stepfun-ai/step-5-preview",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/writer/palmyra-creative-122b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/writer/palmyra-fin-70b-32k",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/writer/palmyra-med-70b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/writer/palmyra-med-70b-32k",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/z-ai/glm-5.3-flash",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/zyphra/zamba2-7b-instruct",
           "ctx": 0
         }
       ]
@@ -274,10 +339,8 @@
       "providers": [
         "aider"
       ],
-      "daily_limit": null,
-      "shared": false,
-      "endpoint": "https://api.sambanova.ai/v1",
       "model_prefix": "sambanova/",
+      "endpoint": "https://api.sambanova.ai/v1",
       "count": 6,
       "models": [
         {
@@ -305,6 +368,476 @@
           "ctx": 0
         }
       ]
+    },
+    "cohere_trial": {
+      "providers": [
+        "opencode"
+      ],
+      "model_prefix": "cohere/",
+      "endpoint": "https://api.cohere.com/v1",
+      "count": 13,
+      "models": [
+        {
+          "id": "c4ai-aya-expanse-32b",
+          "ctx": 0
+        },
+        {
+          "id": "command-a-03-2025",
+          "ctx": 0
+        },
+        {
+          "id": "command-a-plus-05-2026",
+          "ctx": 0
+        },
+        {
+          "id": "command-a-reasoning-08-2025",
+          "ctx": 0
+        },
+        {
+          "id": "command-r-08-2024",
+          "ctx": 0
+        },
+        {
+          "id": "command-r-plus-08-2024",
+          "ctx": 0
+        },
+        {
+          "id": "command-r7b-12-2024",
+          "ctx": 0
+        },
+        {
+          "id": "command-r7b-arabic-02-2025",
+          "ctx": 0
+        },
+        {
+          "id": "north-mini-code-1.0",
+          "ctx": 0
+        },
+        {
+          "id": "tiny-aya-earth",
+          "ctx": 0
+        },
+        {
+          "id": "tiny-aya-fire",
+          "ctx": 0
+        },
+        {
+          "id": "tiny-aya-global",
+          "ctx": 0
+        },
+        {
+          "id": "tiny-aya-water",
+          "ctx": 0
+        }
+      ]
+    },
+    "gemini_direct": {
+      "providers": [
+        "opencode"
+      ],
+      "model_prefix": "google/",
+      "endpoint": "https://generativelanguage.googleapis.com/v1beta",
+      "count": 32,
+      "models": [
+        {
+          "id": "gemini-2.5-flash",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-2.5-pro",
+          "ctx": 0
+        },
+        {
+          "id": "gemma-4-26b-a4b-it",
+          "ctx": 0
+        },
+        {
+          "id": "gemma-4-31b-it",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-flash-latest",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-flash-lite-latest",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-pro-latest",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-2.5-flash-lite",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3-flash-preview",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.1-pro-preview",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.1-pro-preview-customtools",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.1-flash-lite-preview",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.1-flash-lite",
+          "ctx": 0
+        },
+        {
+          "id": "nano-banana-pro-preview",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-nano-banana-2.1",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.5-flash",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.5-flash-lite",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-omni-flash-preview",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-omni-1.1-flash",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.5-transcribe",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.6-flash",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.7-flash",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.8-flash",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-4-argon",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-robotics-er-2-preview",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-2.5-computer-use-preview-10-2025",
+          "ctx": 0
+        },
+        {
+          "id": "antigravity-preview-05-2026",
+          "ctx": 0
+        },
+        {
+          "id": "antigravity-preview-09-2026",
+          "ctx": 0
+        },
+        {
+          "id": "antigravity-preview-latest",
+          "ctx": 0
+        },
+        {
+          "id": "deep-research-max-preview-04-2026",
+          "ctx": 0
+        },
+        {
+          "id": "deep-research-preview-04-2026",
+          "ctx": 0
+        },
+        {
+          "id": "deep-research-pro-preview-12-2025",
+          "ctx": 0
+        }
+      ]
+    },
+    "cloudflare_free": {
+      "providers": [
+        "aider"
+      ],
+      "model_prefix": "cloudflare/",
+      "endpoint": "https://api.cloudflare.com/client/v4",
+      "count": 37,
+      "models": [
+        {
+          "id": "cloudflare/@cf/openai/gpt-oss-120b",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/google/gemma-2b-it-lora",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/meta/llama-3.2-3b-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/mistral/mistral-7b-instruct-v0.2-lora",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/moonshotai/kimi-k2.7-code",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/zai-org/glm-5.3",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/utter-project/eurollm-9b-it",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/meta/llama-3.1-8b-instruct-fp8",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/zai-org/glm-5.3-flash",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/meta/llama-3.2-1b-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/moonshotai/kimi-k2.6",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/cloudflare/clef",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/zai-org/glm-4.7-flash",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/meta-llama/llama-2-7b-chat-hf-lora",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/ibm-granite/granite-4.0-h-micro",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/deepseek-ai/deepseek-v4-flash-0731",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/cloudflare/clairic",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/swiss-ai/apertus-v1.5-8b",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/cloudflare/clef-omni",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/qwen/qwen2.5-coder-32b-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/zai-org/glm-5.2",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/nvidia/nemotron-3-120b-a12b",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/qwen/qwen3-30b-a3b-fp8",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/google/gemma-7b-it-lora",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/google/gemma-4-26b-a4b-it",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/mistralai/mistral-small-3.1-24b-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/deepseek-ai/deepseek-v4-pro-0813",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/daily-co/phonellm-mini-alpha-2",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/qwen/qwen3.8-27b",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/openai/gpt-oss-20b",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/meta/llama-4-scout-17b-16e-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/cloudflare/clef-flash",
+          "ctx": 0
+        },
+        {
+          "id": "cloudflare/@cf/qwen/qwq-32b",
+          "ctx": 0
+        }
+      ]
+    },
+    "kilo_subscription": {
+      "providers": [
+        "kilo"
+      ],
+      "model_prefix": "kilo/",
+      "endpoint": "Kilo Gateway (oauth)",
+      "shared": false,
+      "daily_limit": null,
+      "count": 13,
+      "models": [
+        {
+          "id": "kilo/cohere/north-mini-code:free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/dots-studio/dots-3-note-preview:free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/kilo-auto/free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/liquid/lfm-2.5-2.6b:free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/nvidia/nemotron-3-ultra-550b-a55b:free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/nvidia/nemotron-3.5-lightning:free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/nvidia/nemotron-3.5-super-vl:free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/poolside/laguna-s-2.1:free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/poolside/laguna-xs-2.1:free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/recursive/flint-v1.0:free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/reflection/beam-free",
+          "ctx": 0
+        },
+        {
+          "id": "kilo/xingchen-agi/xing4.0-29b-a4b:free",
+          "ctx": 0
+        }
+      ]
+    },
+    "agy_antigravity": {
+      "providers": [
+        "agy"
+      ],
+      "model_prefix": "",
+      "endpoint": "Antigravity CLI (own metered quota)",
+      "shared": false,
+      "daily_limit": null,
+      "count": 6,
+      "models": [
+        {
+          "id": "gemini-3.8-flash-high",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.8-flash-medium",
+          "ctx": 0
+        },
+        {
+          "id": "gemini-3.8-flash-low",
+          "ctx": 0
+        },
+        {
+          "id": "claude-sonnet-4-6",
+          "ctx": 0
+        },
+        {
+          "id": "claude-opus-4-6-thinking",
+          "ctx": 0
+        },
+        {
+          "id": "gpt-oss-120b-medium",
+          "ctx": 0
+        }
+      ]
+    },
+    "cline_free": {
+      "providers": [
+        "cline"
+      ],
+      "model_prefix": "cline/",
+      "endpoint": "cline account (no CLI list command)",
+      "shared": false,
+      "daily_limit": null,
+      "count": 0,
+      "models": [],
+      "note": "cline has no models list command; cline-free/* reachable but not enumerable via CLI"
     }
   }
 }
