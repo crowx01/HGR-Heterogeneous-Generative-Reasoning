@@ -40,14 +40,6 @@
       "source": "observed 429 2026-10-28",
       "note": "calibrate on a real mission"
     },
-    "openai": {
-      "status": "dead",
-      "source": "codex credit_balance_exhausted; OPENAI_API_KEY valid but 0 credits"
-    },
-    "deepseek": {
-      "status": "dead",
-      "source": "balance 0.00"
-    },
     "kilo_subscription": {
       "window": "unknown",
       "limit": "Kilo Gateway free tier (oauth, no env keys)",
@@ -56,6 +48,14 @@
       ],
       "source": "kilo auth list (Kilo Gateway oauth); free models from gateway /models",
       "note": "authenticated via `kilo auth login`, NOT env API keys; use free models (kilo/kilo-auto/free, :free). The kilo/~*-latest hosted aliases need PAID credits, do not use."
+    },
+    "openai": {
+      "status": "dead",
+      "source": "codex credit_balance_exhausted; OPENAI_API_KEY valid but 0 credits"
+    },
+    "deepseek": {
+      "status": "dead",
+      "source": "balance 0.00"
     }
   },
   "tiers": {
@@ -85,7 +85,8 @@
       "handover_to": [
         "agy/claude-sonnet-4-6",
         "opencode/google/gemini-3.1-pro-preview",
-        "opencode/nemotron-3-ultra-550b-a55b:free"
+        "opencode/nemotron-3-ultra-550b-a55b:free",
+        "kilo/kilo-auto/free"
       ],
       "cost_salary_usd": 0.01
     },
@@ -100,7 +101,9 @@
       "lane": "feature|review-main",
       "handover_to": [
         "opencode/google/gemini-3.1-pro-preview",
-        "agy/gemini-3.8-flash-high"
+        "agy/gpt-oss-120b-medium",
+        "opencode/nemotron-3-ultra-550b-a55b:free",
+        "kilo/kilo-auto/free"
       ],
       "cost_salary_usd": 0.01
     },
@@ -114,10 +117,11 @@
       "quota_pool": "gemini_direct",
       "lane": "complex-fallback|review-main-fallback",
       "handover_to": [
-        "agy/claude-sonnet-4-6",
-        "opencode/nemotron-3-ultra-550b-a55b:free"
+        "opencode/nemotron-3-ultra-550b-a55b:free",
+        "cline/nemotron-3-ultra-550b-a55b:free",
+        "kilo/kilo-auto/free"
       ],
-      "note": "FREE non-agy deep reasoning; primary deep lane while agy is 429'd",
+      "note": "free-tier via GEMINI_API_KEY but THROTTLE-PRONE (seen free_tier limit:0 bursts); on 429 choke it and fall through handover. keep listed.",
       "cost_salary_usd": 0.01
     },
     {
@@ -131,7 +135,8 @@
       "lane": "complex-fallback",
       "handover_to": [
         "opencode/google/gemini-3.1-pro-preview",
-        "opencode/nemotron-3-ultra-550b-a55b:free"
+        "opencode/nemotron-3-ultra-550b-a55b:free",
+        "kilo/kilo-auto/free"
       ],
       "cost_salary_usd": 0.01
     },
@@ -146,7 +151,8 @@
       "lane": "feature-fallback",
       "handover_to": [
         "opencode/google/gemini-3.8-flash",
-        "opencode/nemotron-3-ultra-550b-a55b:free"
+        "opencode/nemotron-3-ultra-550b-a55b:free",
+        "kilo/kilo-auto/free"
       ],
       "cost_salary_usd": 0.01
     },
@@ -161,8 +167,11 @@
       "lane": "review-debate",
       "handover_to": [
         "cline/nemotron-3-ultra-550b-a55b:free",
-        "opencode/cohere/north-mini-code:free"
+        "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
+        "opencode/cohere/north-mini-code:free",
+        "kilo/kilo-auto/free"
       ],
+      "note": "strongest free openrouter model (1M ctx); shared 50/day openrouter pool",
       "cost_salary_usd": 0.01
     },
     {
@@ -175,110 +184,10 @@
       "quota_pool": "gemini_direct",
       "lane": "ui-fallback",
       "handover_to": [
+        "crush/gemini-3.5-flash",
         "opencode/cohere/command-a-03-2025",
-        "opencode/gemma-4-31b-it:free"
-      ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "agy/gemini-3.8-flash-medium",
-      "cli": "agy",
-      "tier": "T3_code",
-      "intelligence": 70,
-      "role": "code",
-      "salary_dispatches": 2,
-      "quota_pool": "agy_antigravity",
-      "lane": "ui",
-      "handover_to": [
-        "opencode/google/gemini-3.8-flash",
-        "opencode/cohere/command-a-03-2025"
-      ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/cohere/command-a-03-2025",
-      "cli": "opencode",
-      "tier": "T3_code",
-      "intelligence": 66,
-      "role": "code",
-      "salary_dispatches": 15,
-      "quota_pool": "cohere_trial",
-      "lane": "tests-fallback",
-      "handover_to": [
         "opencode/cohere/north-mini-code:free",
-        "opencode/gemma-4-31b-it:free"
-      ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/cohere/north-mini-code:free",
-      "cli": "opencode",
-      "tier": "T3_code",
-      "intelligence": 60,
-      "role": "code",
-      "salary_dispatches": 8,
-      "quota_pool": "openrouter_free",
-      "lane": "tests",
-      "handover_to": [
-        "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
-        "opencode/gemma-4-31b-it:free"
-      ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "agy/gemini-3.8-flash-low",
-      "cli": "agy",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 2,
-      "quota_pool": "agy_antigravity",
-      "lane": "fast",
-      "handover_to": [
-        "opencode/google/gemini-3.8-flash",
-        "opencode/gemma-4-31b-it:free"
-      ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/gemma-4-31b-it:free",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 50,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "openrouter_free",
-      "lane": "fast-fallback",
-      "handover_to": [
-        "cline/nemotron-3-ultra-550b-a55b:free"
-      ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "cline/nemotron-3-ultra-550b-a55b:free",
-      "cli": "cline",
-      "tier": "T4_grind",
-      "intelligence": 77,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "openrouter_free",
-      "lane": "grind",
-      "handover_to": [
-        "aider/openrouter/nemotron-3-ultra-550b-a55b:free"
-      ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 77,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "openrouter_free",
-      "lane": "patch",
-      "handover_to": [
-        "opencode/gemma-4-31b-it:free"
+        "kilo/kilo-auto/free"
       ],
       "cost_salary_usd": 0.01
     },
@@ -293,9 +202,106 @@
       "lane": "-",
       "handover_to": [
         "opencode/google/gemini-3.8-flash",
+        "opencode/cohere/command-a-03-2025",
         "opencode/cohere/north-mini-code:free"
       ],
       "dispatch": "crush run --quiet -m <model> \"<brief>\" (cwd=target dir; edits files in cwd like opencode; no *-delegate lane)",
+      "note": "crush edits files in cwd like opencode; no *-delegate lane, dispatched directly",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "agy/gemini-3.8-flash-medium",
+      "cli": "agy",
+      "tier": "T3_code",
+      "intelligence": 70,
+      "role": "code",
+      "salary_dispatches": 2,
+      "quota_pool": "agy_antigravity",
+      "lane": "ui",
+      "handover_to": [
+        "opencode/google/gemini-3.8-flash",
+        "opencode/cohere/command-a-03-2025",
+        "kilo/kilo-auto/free"
+      ],
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/cohere/command-a-03-2025",
+      "cli": "opencode",
+      "tier": "T3_code",
+      "intelligence": 66,
+      "role": "code",
+      "salary_dispatches": 15,
+      "quota_pool": "cohere_trial",
+      "lane": "tests-fallback",
+      "handover_to": [
+        "opencode/cohere/north-mini-code:free",
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/cohere/north-mini-code:free",
+      "cli": "opencode",
+      "tier": "T3_code",
+      "intelligence": 60,
+      "role": "code",
+      "salary_dispatches": 8,
+      "quota_pool": "openrouter_free",
+      "lane": "tests",
+      "handover_to": [
+        "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 77,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "openrouter_free",
+      "lane": "patch",
+      "handover_to": [
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "cline/nemotron-3-ultra-550b-a55b:free",
+      "cli": "cline",
+      "tier": "T4_grind",
+      "intelligence": 77,
+      "role": "grind",
+      "salary_dispatches": 10,
+      "quota_pool": "openrouter_free",
+      "lane": "grind",
+      "handover_to": [
+        "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "agy/gemini-3.8-flash-low",
+      "cli": "agy",
+      "tier": "T4_grind",
+      "intelligence": 55,
+      "role": "grind",
+      "salary_dispatches": 2,
+      "quota_pool": "agy_antigravity",
+      "lane": "fast",
+      "handover_to": [
+        "opencode/google/gemini-3.8-flash",
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
       "cost_salary_usd": 0.01
     },
     {
@@ -308,9 +314,25 @@
       "quota_pool": "kilo_subscription",
       "lane": "kilo",
       "handover_to": [
-        "opencode/cohere/command-a-03-2025"
+        "opencode/cohere/command-a-03-2025",
+        "opencode/gemma-4-31b-it:free"
       ],
       "note": "Kilo Gateway free auto-router (oauth, zero-dollar, no env keys)",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/gemma-4-31b-it:free",
+      "cli": "opencode",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 10,
+      "quota_pool": "openrouter_free",
+      "lane": "fast-fallback",
+      "handover_to": [
+        "cline/nemotron-3-ultra-550b-a55b:free",
+        "kilo/kilo-auto/free"
+      ],
       "cost_salary_usd": 0.01
     }
   ],
