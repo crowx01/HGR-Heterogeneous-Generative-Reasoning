@@ -28,6 +28,8 @@ function loadLedger(mission) {
       objective: '',
       dispatches: {},
       pool_used: {},
+      costs: {},
+      tokens: {},
       chokes: [],
       handovers: [],
       status: 'active'
@@ -38,6 +40,8 @@ function loadLedger(mission) {
   const ledger = JSON.parse(readFileSync(path, 'utf8'));
   ledger.dispatches = ledger.dispatches || {};
   ledger.pool_used = ledger.pool_used || {};
+  ledger.costs = ledger.costs || {};
+  ledger.tokens = ledger.tokens || {};
   ledger.chokes = ledger.chokes || [];
   ledger.handovers = ledger.handovers || [];
   return ledger;
@@ -63,6 +67,16 @@ function isEligible(model, ledger, modelsData) {
   const used = ledger.dispatches[model.id] || 0;
   const salary = model.salary_dispatches === 'inf' ? Infinity : (model.salary_dispatches || Infinity);
   if (used >= salary) return false;
+
+  if (typeof model.cost_salary_usd === 'number') {
+    const spent = ledger.costs[model.id] || 0;
+    if (spent >= model.cost_salary_usd) return false;
+  }
+
+  if (typeof model.token_salary === 'number') {
+    const spentTokens = ledger.tokens[model.id] || 0;
+    if (spentTokens >= model.token_salary) return false;
+  }
 
   const pool = model.quota_pool;
   if (pool && modelsData.quotas[pool]) {
@@ -127,6 +141,10 @@ function formatPick(model, ledger, modelsData) {
     quota_pool: model.quota_pool,
     salary_remaining: salaryRemaining,
     pool_remaining: poolRemaining,
+    cost_spent: ledger.costs[model.id] || 0,
+    cost_salary_usd: typeof model.cost_salary_usd === 'number' ? model.cost_salary_usd : null,
+    tokens_spent: ledger.tokens[model.id] || 0,
+    token_salary: typeof model.token_salary === 'number' ? model.token_salary : null,
     handover_to: model.handover_to || []
   };
 }
@@ -180,6 +198,14 @@ async function cmdSpend(args) {
   }
 
   ledger.dispatches[modelId] = (ledger.dispatches[modelId] || 0) + 1;
+  const cost = parseFloat(args['--cost']);
+  if (!Number.isNaN(cost)) {
+    ledger.costs[modelId] = (ledger.costs[modelId] || 0) + cost;
+  }
+  const tokens = parseInt(args['--tokens'], 10);
+  if (!Number.isNaN(tokens)) {
+    ledger.tokens[modelId] = (ledger.tokens[modelId] || 0) + tokens;
+  }
   if (model.quota_pool) {
     ledger.pool_used[model.quota_pool] = (ledger.pool_used[model.quota_pool] || 0) + 1;
   }
@@ -262,6 +288,8 @@ async function cmdStatus(args) {
     objective: ledger.objective,
     lanes,
     spent: ledger.dispatches,
+    costs: ledger.costs,
+    tokens: ledger.tokens,
     chokes: ledger.chokes
   }));
 }
