@@ -25,6 +25,16 @@
       "status": "UP",
       "note": "authenticated (Kilo Gateway oauth); free models only (kilo/kilo-auto/free). ~*-latest aliases are PAID, avoid.",
       "rank": 2
+    },
+    "nvidia_nim_free": {
+      "status": "UP",
+      "note": "NVIDIA NIM free dev tier; nemotron-550b inference verified.",
+      "rank": 2
+    },
+    "sambanova_free": {
+      "status": "UP_THROTTLED",
+      "note": "SambaNova free; key valid, seen 429 high-demand.",
+      "rank": 3
     }
   },
   "roster": [
@@ -49,15 +59,6 @@
     {
       "id": "opencode/google/gemini-3.8-flash",
       "intel": 72,
-      "tier": "T3_code",
-      "role": "code",
-      "pool": "gemini_direct",
-      "pstatus": "UP_THROTTLED",
-      "prank": 1
-    },
-    {
-      "id": "crush/gemini-3.5-flash",
-      "intel": 71,
       "tier": "T3_code",
       "role": "code",
       "pool": "gemini_direct",

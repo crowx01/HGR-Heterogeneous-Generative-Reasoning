@@ -49,6 +49,24 @@
       "source": "kilo auth list (Kilo Gateway oauth); free models from gateway /models",
       "note": "authenticated via `kilo auth login`, NOT env API keys; use free models (kilo/kilo-auto/free, :free). The kilo/~*-latest hosted aliases need PAID credits, do not use."
     },
+    "nvidia_nim_free": {
+      "window": "unknown",
+      "limit": "NVIDIA NIM free dev tier (build.nvidia.com)",
+      "shared_by": [
+        "aider"
+      ],
+      "source": "integrate.api.nvidia.com /models+/chat 200; nemotron-3-ultra-550b verified inference 2026-10-29",
+      "note": "NVIDIA_NIM_API_KEY in aider env file (zero-dollar dev tier). env-file keys are aider-only."
+    },
+    "sambanova_free": {
+      "window": "unknown",
+      "limit": "SambaNova free tier (rate/demand limited)",
+      "shared_by": [
+        "aider"
+      ],
+      "source": "api.sambanova.ai 200 list; seen 429 high-demand 2026-10-29",
+      "note": "SAMBANOVA_API_KEY in aider env file; throttle-prone, on 429 choke+handover. env-file keys are aider-only."
+    },
     "openai": {
       "status": "dead",
       "source": "codex credit_balance_exhausted; OPENAI_API_KEY valid but 0 credits"
@@ -184,29 +202,10 @@
       "quota_pool": "gemini_direct",
       "lane": "ui-fallback",
       "handover_to": [
-        "crush/gemini-3.5-flash",
         "opencode/cohere/command-a-03-2025",
         "opencode/cohere/north-mini-code:free",
         "kilo/kilo-auto/free"
       ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "crush/gemini-3.5-flash",
-      "cli": "crush",
-      "tier": "T3_code",
-      "intelligence": 71,
-      "role": "code",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "-",
-      "handover_to": [
-        "opencode/google/gemini-3.8-flash",
-        "opencode/cohere/command-a-03-2025",
-        "opencode/cohere/north-mini-code:free"
-      ],
-      "dispatch": "crush run --quiet -m <model> \"<brief>\" (cwd=target dir; edits files in cwd like opencode; no *-delegate lane)",
-      "note": "crush edits files in cwd like opencode; no *-delegate lane, dispatched directly",
       "cost_salary_usd": 0.01
     },
     {
@@ -333,6 +332,106 @@
         "cline/nemotron-3-ultra-550b-a55b:free",
         "kilo/kilo-auto/free"
       ],
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b",
+      "cli": "aider",
+      "tier": "T2_strong",
+      "intelligence": 78,
+      "role": "analysis",
+      "salary_dispatches": 10,
+      "quota_pool": "nvidia_nim_free",
+      "lane": "aider-nim",
+      "handover_to": [
+        "aider/sambanova/gpt-oss-120b",
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "NVIDIA NIM free; 550b nemotron. zero-dollar.",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/nvidia_nim/deepseek-ai/deepseek-v4.1-flash",
+      "cli": "aider",
+      "tier": "T3_code",
+      "intelligence": 70,
+      "role": "code",
+      "salary_dispatches": 15,
+      "quota_pool": "nvidia_nim_free",
+      "lane": "aider-nim-code",
+      "handover_to": [
+        "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "NVIDIA NIM free; deepseek flash coder. zero-dollar.",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
+      "cli": "aider",
+      "tier": "T3_code",
+      "intelligence": 62,
+      "role": "code",
+      "salary_dispatches": 15,
+      "quota_pool": "nvidia_nim_free",
+      "lane": "aider-nim-code",
+      "handover_to": [
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "NVIDIA NIM free; codestral. zero-dollar.",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/sambanova/gpt-oss-120b",
+      "cli": "aider",
+      "tier": "T2_strong",
+      "intelligence": 75,
+      "role": "analysis",
+      "salary_dispatches": 8,
+      "quota_pool": "sambanova_free",
+      "lane": "aider-sn",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b",
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "SambaNova free; gpt-oss-120b. throttle-prone.",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/sambanova/DeepSeek-V3.1",
+      "cli": "aider",
+      "tier": "T3_code",
+      "intelligence": 74,
+      "role": "code",
+      "salary_dispatches": 8,
+      "quota_pool": "sambanova_free",
+      "lane": "aider-sn-code",
+      "handover_to": [
+        "aider/nvidia_nim/deepseek-ai/deepseek-v4.1-flash",
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "SambaNova free; deepseek v3.1. throttle-prone.",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/sambanova/Meta-Llama-3.3-70B-Instruct",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 72,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "sambanova_free",
+      "lane": "aider-sn",
+      "handover_to": [
+        "opencode/gemma-4-31b-it:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "SambaNova free; llama 3.3 70b. throttle-prone.",
       "cost_salary_usd": 0.01
     }
   ],

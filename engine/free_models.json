@@ -97,8 +97,7 @@
       "providers": [
         "opencode",
         "cline",
-        "aider",
-        "crush"
+        "aider"
       ],
       "daily_limit": null,
       "shared": false,
@@ -230,6 +229,82 @@
       "metered": true,
       "note": "own metered quota; 429 => choke --pool; ~5-day reset",
       "models": []
+    },
+    "nvidia_nim_free": {
+      "providers": [
+        "aider"
+      ],
+      "daily_limit": null,
+      "shared": false,
+      "endpoint": "https://integrate.api.nvidia.com/v1",
+      "model_prefix": "nvidia_nim/",
+      "count": 7,
+      "models": [
+        {
+          "id": "nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/nemotron-3-super-120b-a12b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/deepseek-ai/deepseek-v4.1-flash",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/llama-3.1-nemotron-70b-instruct",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/openai/gpt-oss-20b",
+          "ctx": 0
+        },
+        {
+          "id": "nvidia_nim/nvidia/nemotron-3.5-lightning-30b-a3b",
+          "ctx": 0
+        }
+      ]
+    },
+    "sambanova_free": {
+      "providers": [
+        "aider"
+      ],
+      "daily_limit": null,
+      "shared": false,
+      "endpoint": "https://api.sambanova.ai/v1",
+      "model_prefix": "sambanova/",
+      "count": 6,
+      "models": [
+        {
+          "id": "sambanova/DeepSeek-V3.1",
+          "ctx": 0
+        },
+        {
+          "id": "sambanova/DeepSeek-V3.2",
+          "ctx": 0
+        },
+        {
+          "id": "sambanova/Meta-Llama-3.3-70B-Instruct",
+          "ctx": 0
+        },
+        {
+          "id": "sambanova/MiniMax-M3.1-Flash",
+          "ctx": 0
+        },
+        {
+          "id": "sambanova/gemma-4-31B-it",
+          "ctx": 0
+        },
+        {
+          "id": "sambanova/gpt-oss-120b",
+          "ctx": 0
+        }
+      ]
     }
   }
 }

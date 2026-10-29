@@ -4,7 +4,7 @@ Every file under `engine/`, and under each the functions or CLI commands it expo
 
 ## engine/config.json
 
-The lane map. Each lane name maps to an object with `implementer` (which CLI), `model`, and optionally `provider` and `readOnly`. A lane is a named routing slot that binds one CLI to one model. Lanes present: `review-main`, `review-debate`, `feature`, `complex`, `tests`, `fast`, `ui`, `grind`, `patch`, `deep-free`, `flash-free`, `crush`, `kilo`, `cohere`.
+The lane map. Each lane name maps to an object with `implementer` (which CLI), `model`, and optionally `provider` and `readOnly`. A lane is a named routing slot that binds one CLI to one model. Lanes present: `review-main`, `review-debate`, `feature`, `complex`, `tests`, `fast`, `ui`, `grind`, `patch`, `deep-free`, `flash-free`, `kilo`, `cohere`, `aider-nim`, `aider-nim-code`, `aider-sn`, `aider-sn-code`.
 
 ## engine/economy.mjs
 

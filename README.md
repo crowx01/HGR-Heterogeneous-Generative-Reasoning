@@ -50,11 +50,11 @@ On a 429 or an exhausted pool, the model is choked and the subtask hands over to
 
 For a step-by-step setup, see [docs/INSTALLATION.md](docs/INSTALLATION.md).
 
-Install Node 18+, then the CLIs you want in the fleet (opencode, aider, cline, agy, crush). Point the engine at its config directory with `CONFIG_DIR` (default `/home/kali/.config/delegate-skills`). Then:
+Install Node 18+, then the CLIs you want in the fleet (opencode, aider, cline, agy, kilo). Point the engine at its config directory with `CONFIG_DIR` (default `/home/kali/.config/delegate-skills`). Then:
 
 ```
 node engine/economy.mjs pick   --role deep --mission demo
-node engine/consensus.mjs --brief brief.txt --lanes crush,patch,tests --mission demo
+node engine/consensus.mjs --brief brief.txt --lanes patch,tests,fast --mission demo
 ```
 
 ## Install the CLIs
@@ -65,16 +65,13 @@ Install only the ones you plan to route to. Each is an independent implementer.
 `npm i -g opencode-ai` then `opencode auth login`. Needs Node 18+.
 
 ### aider
-`python -m pip install aider-chat` (or pipx). It authenticates with a provider key in the environment (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `OPENROUTER_API_KEY`, `COHERE_API_KEY`, and so on). It can also drive a local OpenAI-compatible endpoint with `--api-base` plus a non-empty `OPENAI_API_KEY`.
+`python -m pip install aider-chat` (or pipx). It authenticates with a provider key in the environment (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `OPENROUTER_API_KEY`, `COHERE_API_KEY`, and so on). It can also drive a local OpenAI-compatible endpoint with `--api-base` plus a non-empty `OPENAI_API_KEY`. Several provider keys in the aider env file drive zero-dollar free lanes: OpenRouter free models, the NVIDIA NIM free dev tier (lanes aider-nim and aider-nim-code), and the SambaNova free tier (lanes aider-sn and aider-sn-code, rate limited).
 
 ### cline
 Install the Cline CLI (npm package or bundled binary), then `cline auth`. Needs Node 18+.
 
 ### agy (Google Antigravity CLI)
 Install from the Antigravity CLI docs and complete first-launch auth, then verify with `agy help`. It has its own metered quota.
-
-### crush (Charmbracelet Crush)
-Install per the Crush project docs (a package manager or `go install`), then verify with `crush models`. It edits files in the working directory like opencode and has no `*-delegate` lane, so it is invoked directly.
 
 ### kilo (Kilo Code CLI)
 Install with `npm i -g @kilocode/cli`, then `kilo auth login`. Needs Node 18+. Kilo is a fork of opencode and shares its command set. It authenticates through its own login and does not use environment API keys (only aider uses environment keys). Use its free models (for example `kilo/kilo-auto/free`); the `kilo/~...-latest` hosted aliases need paid Kilo Gateway credits.
@@ -120,7 +117,7 @@ node engine/economy.mjs pick   --role deep --mission demo
 node engine/economy.mjs spend  --role code --mission demo
 node engine/economy.mjs choke  --model agy/claude-sonnet-4-6 --mission demo --why 429 --pool
 node engine/economy.mjs status --mission demo
-node engine/consensus.mjs --brief brief.txt --lanes crush,patch,tests --mission demo
+node engine/consensus.mjs --brief brief.txt --lanes patch,tests,fast --mission demo
 ```
 
 ## Limitations

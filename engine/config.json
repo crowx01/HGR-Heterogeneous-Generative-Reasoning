@@ -48,10 +48,6 @@
       "implementer": "opencode",
       "model": "google/gemini-3.8-flash"
     },
-    "crush": {
-      "implementer": "crush",
-      "model": "gemini/gemini-3.5-flash"
-    },
     "cohere": {
       "implementer": "opencode",
       "model": "cohere/command-a-03-2025"
@@ -59,6 +55,22 @@
     "kilo": {
       "implementer": "kilo",
       "model": "kilo/kilo-auto/free"
+    },
+    "aider-nim": {
+      "implementer": "aider",
+      "model": "nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "aider-nim-code": {
+      "implementer": "aider",
+      "model": "nvidia_nim/deepseek-ai/deepseek-v4.1-flash"
+    },
+    "aider-sn": {
+      "implementer": "aider",
+      "model": "sambanova/gpt-oss-120b"
+    },
+    "aider-sn-code": {
+      "implementer": "aider",
+      "model": "sambanova/DeepSeek-V3.1"
     }
   }
 }
