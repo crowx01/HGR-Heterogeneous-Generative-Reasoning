@@ -205,4 +205,82 @@ describe('economy.mjs', () => {
     strictEqual(out.model, 'm4');
     strictEqual(out.salary_remaining, 'inf');
   });
+
+  test('cost_salary_usd dollar wall excludes model once costs reach it', () => {
+    // Separate fixture: c1 has $1.00 wall, c2 has no wall, c3 has $5.00 wall
+    const costModels = {
+      quotas: {},
+      models: [
+        { id: 'c1', cli: 'cli1', tier: 'T1', intelligence: 90, role: 'deep', salary_dispatches: 10, lane: 'l1', handover_to: [], cost_salary_usd: 1.00 },
+        { id: 'c2', cli: 'cli1', tier: 'T1', intelligence: 80, role: 'deep', salary_dispatches: 10, lane: 'l1', handover_to: [] },
+        { id: 'c3', cli: 'cli1', tier: 'T1', intelligence: 70, role: 'deep', salary_dispatches: 10, lane: 'l1', handover_to: [], cost_salary_usd: 5.00 }
+      ]
+    };
+    const costModelsFile = join(TEST_DIR, 'models.cost.json');
+    writeFileSync(costModelsFile, JSON.stringify(costModels, null, 2));
+    const env = { MODELS_FILE: costModelsFile };
+
+    // c1 below wall: still eligible
+    const r1 = runEconomy(['spend', '--model', 'c1', '--cost', '0.6', '--mission', 'test12'], env);
+    strictEqual(JSON.parse(r1.stdout.trim()).model, 'c1');
+
+    // c1 spend that lands exactly on the wall (0.6 + 0.4 = 1.00) is allowed (eligibility is checked before the spend)
+    const r2 = runEconomy(['spend', '--model', 'c1', '--cost', '0.4', '--mission', 'test12'], env);
+    strictEqual(JSON.parse(r2.stdout.trim()).model, 'c1');
+
+    // next spend on c1 is blocked: costs (1.00) >= wall (1.00)
+    const r2b = runEconomy(['spend', '--model', 'c1', '--cost', '0.1', '--mission', 'test12'], env);
+    strictEqual(JSON.parse(r2b.stdout.trim()).model, null);
+
+    const ledger = JSON.parse(readFileSync(join(TEST_DIR, 'ledger.test12.json'), 'utf8'));
+    strictEqual(ledger.costs.c1, 1);
+    strictEqual(ledger.dispatches.c1, 2);
+
+    // pick skips c1 (walled) and lands on c2 (no wall)
+    const pick = JSON.parse(runEconomy(['pick', '--role', 'deep', '--mission', 'test12'], env).stdout.trim());
+    strictEqual(pick.model, 'c2');
+
+    // c3 below its $5.00 wall stays eligible
+    const r3 = runEconomy(['spend', '--model', 'c3', '--cost', '0.5', '--mission', 'test12'], env);
+    strictEqual(JSON.parse(r3.stdout.trim()).model, 'c3');
+  });
+
+  test('token_salary token wall excludes model once tokens reach it', () => {
+    // Separate fixture: t1 has a 1000-token wall, t2 a far larger wall, t3 no wall
+    const tokenModels = {
+      quotas: {},
+      models: [
+        { id: 't1', cli: 'cli1', tier: 'T1', intelligence: 90, role: 'deep', salary_dispatches: 10, lane: 'l1', handover_to: [], token_salary: 1000 },
+        { id: 't2', cli: 'cli1', tier: 'T1', intelligence: 80, role: 'deep', salary_dispatches: 10, lane: 'l1', handover_to: [], token_salary: 1000000 },
+        { id: 't3', cli: 'cli1', tier: 'T1', intelligence: 70, role: 'deep', salary_dispatches: 10, lane: 'l1', handover_to: [] }
+      ]
+    };
+    const tokenModelsFile = join(TEST_DIR, 'models.tokens.json');
+    writeFileSync(tokenModelsFile, JSON.stringify(tokenModels, null, 2));
+    const env = { MODELS_FILE: tokenModelsFile };
+
+    // 600 then 400: eligibility is checked before each spend, so both land and tokens reach 1000
+    const r1 = runEconomy(['spend', '--model', 't1', '--tokens', '600', '--mission', 'test13'], env);
+    strictEqual(JSON.parse(r1.stdout.trim()).model, 't1');
+    const r2 = runEconomy(['spend', '--model', 't1', '--tokens', '400', '--mission', 'test13'], env);
+    strictEqual(JSON.parse(r2.stdout.trim()).model, 't1');
+
+    // next spend on t1 is blocked: tokens (1000) >= wall (1000)
+    const r2b = runEconomy(['spend', '--model', 't1', '--tokens', '50', '--mission', 'test13'], env);
+    strictEqual(JSON.parse(r2b.stdout.trim()).model, null);
+
+    const ledger = JSON.parse(readFileSync(join(TEST_DIR, 'ledger.test13.json'), 'utf8'));
+    strictEqual(ledger.tokens.t1, 1000);
+    strictEqual(ledger.dispatches.t1, 2);
+
+    // pick skips t1 (walled) and lands on t2 (wall far above spend)
+    const pick = JSON.parse(runEconomy(['pick', '--role', 'deep', '--mission', 'test13'], env).stdout.trim());
+    strictEqual(pick.model, 't2');
+
+    // t2 (large wall) and t3 (no wall) stay eligible
+    const r3 = runEconomy(['spend', '--model', 't2', '--tokens', '500', '--mission', 'test13'], env);
+    strictEqual(JSON.parse(r3.stdout.trim()).model, 't2');
+    const r4 = runEconomy(['spend', '--model', 't3', '--tokens', '999999', '--mission', 'test13'], env);
+    strictEqual(JSON.parse(r4.stdout.trim()).model, 't3');
+  });
 });
