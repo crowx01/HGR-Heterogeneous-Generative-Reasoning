@@ -97,15 +97,16 @@
       "tier": "T1_deep",
       "intelligence": 97,
       "role": "deep",
-      "salary_dispatches": 1,
+      "salary_dispatches": 2,
       "quota_pool": "agy_antigravity",
-      "lane": "complex",
+      "lane": "agy_antigravity",
       "handover_to": [
-        "agy/claude-sonnet-4-6",
-        "opencode/google/gemini-3.1-pro-preview",
-        "opencode/nemotron-3-ultra-550b-a55b:free",
+        "aider/nvidia_nim/mistralai/mistral-large-4-1t-a52b",
+        "aider/sambanova/DeepSeek-V3.2",
+        "aider/cloudflare/@cf/meta/llama-4-scout-17b-16e-instruct",
         "kilo/kilo-auto/free"
       ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -116,66 +117,32 @@
       "role": "deep",
       "salary_dispatches": 2,
       "quota_pool": "agy_antigravity",
-      "lane": "feature|review-main",
+      "lane": "agy_antigravity",
       "handover_to": [
-        "opencode/google/gemini-3.1-pro-preview",
-        "agy/gpt-oss-120b-medium",
-        "opencode/nemotron-3-ultra-550b-a55b:free",
+        "aider/nvidia_nim/mistralai/mistral-large-4-1t-a52b",
+        "aider/sambanova/DeepSeek-V3.2",
+        "aider/cloudflare/@cf/meta/llama-4-scout-17b-16e-instruct",
         "kilo/kilo-auto/free"
       ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "opencode/google/gemini-2.5-pro",
-      "cli": "opencode",
+      "id": "aider/nvidia_nim/mistralai/mistral-large-4-1t-a52b",
+      "cli": "aider",
       "tier": "T1_deep",
-      "intelligence": 90,
+      "intelligence": 88,
       "role": "deep",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
+      "salary_dispatches": 10,
+      "quota_pool": "nvidia_nim_free",
+      "lane": "nvidia_nim_free",
       "handover_to": [
         "aider/sambanova/DeepSeek-V3.2",
+        "aider/cloudflare/@cf/meta/llama-4-scout-17b-16e-instruct",
         "kilo/nvidia/nemotron-3-ultra-550b-a55b:free",
-        "opencode/nvidia/nemotron-3-ultra-550b-a55b:free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-3.1-pro-preview",
-      "cli": "opencode",
-      "tier": "T1_deep",
-      "intelligence": 90,
-      "role": "deep",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "complex-fallback|review-main-fallback",
-      "handover_to": [
-        "opencode/nemotron-3-ultra-550b-a55b:free",
-        "cline/nemotron-3-ultra-550b-a55b:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "free-tier via GEMINI_API_KEY but THROTTLE-PRONE (seen free_tier limit:0 bursts); on 429 choke it and fall through handover. keep listed.",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-4-argon",
-      "cli": "opencode",
-      "tier": "T1_deep",
-      "intelligence": 90,
-      "role": "deep",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "aider/sambanova/DeepSeek-V3.2",
-        "kilo/nvidia/nemotron-3-ultra-550b-a55b:free",
-        "opencode/nvidia/nemotron-3-ultra-550b-a55b:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -188,12 +155,48 @@
       "quota_pool": "sambanova_free",
       "lane": "sambanova_free",
       "handover_to": [
+        "aider/cloudflare/@cf/meta/llama-4-scout-17b-16e-instruct",
+        "aider/nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b",
+        "kilo/nvidia/nemotron-3-ultra-550b-a55b:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/meta/llama-4-scout-17b-16e-instruct",
+      "cli": "aider",
+      "tier": "T1_deep",
+      "intelligence": 85,
+      "role": "deep",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b",
+        "kilo/nvidia/nemotron-3-ultra-550b-a55b:free",
+        "opencode/nvidia/nemotron-3-ultra-550b-a55b:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b",
+      "cli": "aider",
+      "tier": "T1_deep",
+      "intelligence": 85,
+      "role": "deep",
+      "salary_dispatches": 10,
+      "quota_pool": "nvidia_nim_free",
+      "lane": "nvidia_nim_free",
+      "handover_to": [
         "kilo/nvidia/nemotron-3-ultra-550b-a55b:free",
         "opencode/nvidia/nemotron-3-ultra-550b-a55b:free",
         "opencode/cohere/command-a-plus-05-2026",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -211,7 +214,7 @@
         "agy/gpt-oss-120b-medium",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -229,7 +232,7 @@
         "aider/cloudflare/@cf/openai/gpt-oss-120b",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -244,10 +247,10 @@
       "handover_to": [
         "agy/gpt-oss-120b-medium",
         "aider/cloudflare/@cf/openai/gpt-oss-120b",
-        "aider/nvidia_nim/nvidia/nemotron-3-super-120b-a12b",
+        "aider/sambanova/gpt-oss-120b",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -258,12 +261,14 @@
       "role": "analysis",
       "salary_dispatches": 2,
       "quota_pool": "agy_antigravity",
-      "lane": "complex-fallback",
+      "lane": "agy_antigravity",
       "handover_to": [
-        "opencode/google/gemini-3.1-pro-preview",
-        "opencode/nemotron-3-ultra-550b-a55b:free",
+        "aider/cloudflare/@cf/openai/gpt-oss-120b",
+        "aider/sambanova/gpt-oss-120b",
+        "opencode/cohere/command-a-reasoning-08-2025",
         "kilo/kilo-auto/free"
       ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -276,32 +281,70 @@
       "quota_pool": "cloudflare_free",
       "lane": "cloudflare_free",
       "handover_to": [
-        "agy/gemini-3.8-flash-high",
-        "aider/nvidia_nim/nvidia/nemotron-3-super-120b-a12b",
+        "aider/sambanova/gpt-oss-120b",
         "opencode/cohere/command-a-reasoning-08-2025",
+        "aider/nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "agy/gemini-3.8-flash-high",
-      "cli": "agy",
+      "id": "aider/sambanova/gpt-oss-120b",
+      "cli": "aider",
+      "tier": "T2_strong",
+      "intelligence": 82,
+      "role": "analysis",
+      "salary_dispatches": 6,
+      "quota_pool": "sambanova_free",
+      "lane": "sambanova_free",
+      "handover_to": [
+        "opencode/cohere/command-a-reasoning-08-2025",
+        "aider/cloudflare/@cf/nvidia/nemotron-3-120b-a12b",
+        "aider/nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/cohere/command-a-reasoning-08-2025",
+      "cli": "opencode",
+      "tier": "T2_strong",
+      "intelligence": 82,
+      "role": "analysis",
+      "salary_dispatches": 10,
+      "quota_pool": "cohere_trial",
+      "lane": "cohere_trial",
+      "handover_to": [
+        "aider/cloudflare/@cf/nvidia/nemotron-3-120b-a12b",
+        "aider/nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "aider/sambanova/Meta-Llama-3.3-70B-Instruct",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/nvidia/nemotron-3-120b-a12b",
+      "cli": "aider",
       "tier": "T2_strong",
       "intelligence": 80,
       "role": "analysis",
-      "salary_dispatches": 2,
-      "quota_pool": "agy_antigravity",
-      "lane": "feature-fallback",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
       "handover_to": [
-        "opencode/google/gemini-3.8-flash",
-        "opencode/nemotron-3-ultra-550b-a55b:free",
+        "aider/nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "aider/sambanova/Meta-Llama-3.3-70B-Instruct",
+        "opencode/cohere/command-a-03-2025",
         "kilo/kilo-auto/free"
       ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "aider/nvidia_nim/nvidia/nemotron-3-super-120b-a12b",
+      "id": "aider/nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b",
       "cli": "aider",
       "tier": "T2_strong",
       "intelligence": 80,
@@ -310,30 +353,12 @@
       "quota_pool": "nvidia_nim_free",
       "lane": "nvidia_nim_free",
       "handover_to": [
-        "opencode/cohere/command-a-reasoning-08-2025",
         "aider/cloudflare/@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-        "opencode/nemotron-3-ultra-550b-a55b:free",
+        "aider/sambanova/Meta-Llama-3.3-70B-Instruct",
+        "opencode/cohere/command-a-03-2025",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/cohere/command-a-reasoning-08-2025",
-      "cli": "opencode",
-      "tier": "T2_strong",
-      "intelligence": 80,
-      "role": "analysis",
-      "salary_dispatches": 10,
-      "quota_pool": "cohere_trial",
-      "lane": "cohere_trial",
-      "handover_to": [
-        "aider/cloudflare/@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-        "aider/nvidia_nim/nvidia/llama-3.1-nemotron-70b-instruct",
-        "opencode/nemotron-3-ultra-550b-a55b:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -346,189 +371,66 @@
       "quota_pool": "cloudflare_free",
       "lane": "cloudflare_free",
       "handover_to": [
-        "aider/nvidia_nim/nvidia/llama-3.1-nemotron-70b-instruct",
-        "opencode/nemotron-3-ultra-550b-a55b:free",
-        "opencode/google/gemini-2.5-flash",
+        "aider/sambanova/Meta-Llama-3.3-70B-Instruct",
+        "opencode/cohere/command-a-03-2025",
+        "opencode/deepseek-v4.1-flash-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "aider/nvidia_nim/nvidia/llama-3.1-nemotron-70b-instruct",
+      "id": "aider/sambanova/Meta-Llama-3.3-70B-Instruct",
       "cli": "aider",
       "tier": "T2_strong",
       "intelligence": 78,
       "role": "analysis",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
+      "salary_dispatches": 6,
+      "quota_pool": "sambanova_free",
+      "lane": "sambanova_free",
       "handover_to": [
-        "opencode/nemotron-3-ultra-550b-a55b:free",
-        "opencode/google/gemini-2.5-flash",
-        "aider/cloudflare/@cf/deepseek-ai/deepseek-v4-flash-0731",
+        "opencode/cohere/command-a-03-2025",
+        "opencode/deepseek-v4.1-flash-free",
+        "agy/gemini-3.8-flash-high",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "aider/nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b",
-      "cli": "aider",
-      "tier": "T2_strong",
-      "intelligence": 78,
-      "role": "analysis",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "aider-nim",
-      "handover_to": [
-        "aider/sambanova/gpt-oss-120b",
-        "opencode/gemma-4-31b-it:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "NVIDIA NIM free; 550b nemotron. zero-dollar.",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/nemotron-3-ultra-550b-a55b:free",
+      "id": "opencode/cohere/command-a-03-2025",
       "cli": "opencode",
       "tier": "T2_strong",
       "intelligence": 78,
       "role": "analysis",
-      "salary_dispatches": 8,
-      "quota_pool": "openrouter_free",
-      "lane": "review-debate",
+      "salary_dispatches": 10,
+      "quota_pool": "cohere_trial",
+      "lane": "cohere_trial",
       "handover_to": [
-        "cline/nemotron-3-ultra-550b-a55b:free",
-        "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
-        "opencode/cohere/north-mini-code:free",
+        "opencode/deepseek-v4.1-flash-free",
+        "aider/sambanova/MiniMax-M3.1-Flash",
+        "agy/gemini-3.8-flash-high",
         "kilo/kilo-auto/free"
       ],
-      "note": "strongest free openrouter model (1M ctx); shared 50/day openrouter pool",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "opencode/google/gemini-2.5-flash",
+      "id": "opencode/deepseek-v4.1-flash-free",
       "cli": "opencode",
       "tier": "T2_strong",
-      "intelligence": 77,
-      "role": "analysis",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "aider/cloudflare/@cf/deepseek-ai/deepseek-v4-flash-0731",
-        "aider/sambanova/gpt-oss-120b",
-        "aider/nvidia_nim/minimaxai/minimax-m3.1-flash",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/deepseek-ai/deepseek-v4-flash-0731",
-      "cli": "aider",
-      "tier": "T2_strong",
       "intelligence": 76,
       "role": "analysis",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/sambanova/gpt-oss-120b",
-        "aider/nvidia_nim/minimaxai/minimax-m3.1-flash",
-        "opencode/cohere/command-r-plus-08-2024",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/deepseek-ai/deepseek-v4-pro-0813",
-      "cli": "aider",
-      "tier": "T2_strong",
-      "intelligence": 76,
-      "role": "analysis",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/sambanova/gpt-oss-120b",
-        "aider/nvidia_nim/minimaxai/minimax-m3.1-flash",
-        "opencode/cohere/command-r-plus-08-2024",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/deepseek-ai/deepseek-v4.1-flash-1017",
-      "cli": "aider",
-      "tier": "T2_strong",
-      "intelligence": 76,
-      "role": "analysis",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/sambanova/gpt-oss-120b",
-        "aider/nvidia_nim/minimaxai/minimax-m3.1-flash",
-        "opencode/cohere/command-r-plus-08-2024",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/sambanova/gpt-oss-120b",
-      "cli": "aider",
-      "tier": "T2_strong",
-      "intelligence": 75,
-      "role": "analysis",
-      "salary_dispatches": 8,
-      "quota_pool": "sambanova_free",
-      "lane": "aider-sn",
-      "handover_to": [
-        "aider/nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b",
-        "opencode/gemma-4-31b-it:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "SambaNova free; gpt-oss-120b. throttle-prone.",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/minimaxai/minimax-m3.1-flash",
-      "cli": "aider",
-      "tier": "T3_code",
-      "intelligence": 74,
-      "role": "code",
       "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
+      "quota_pool": "opencode_gateway",
+      "lane": "opencode_gateway",
       "handover_to": [
-        "aider/sambanova/DeepSeek-V3.1",
+        "aider/sambanova/MiniMax-M3.1-Flash",
         "opencode/cohere/command-r-plus-08-2024",
-        "opencode/google/gemini-3-flash-preview",
+        "agy/gemini-3.8-flash-high",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/sambanova/DeepSeek-V3.1",
-      "cli": "aider",
-      "tier": "T3_code",
-      "intelligence": 74,
-      "role": "code",
-      "salary_dispatches": 8,
-      "quota_pool": "sambanova_free",
-      "lane": "aider-sn-code",
-      "handover_to": [
-        "aider/nvidia_nim/deepseek-ai/deepseek-v4.1-flash",
-        "opencode/gemma-4-31b-it:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "SambaNova free; deepseek v3.1. throttle-prone.",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -542,11 +444,11 @@
       "lane": "sambanova_free",
       "handover_to": [
         "opencode/cohere/command-r-plus-08-2024",
+        "agy/gemini-3.8-flash-high",
         "opencode/google/gemini-3-flash-preview",
-        "agy/gemini-3.8-flash-medium",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -559,12 +461,66 @@
       "quota_pool": "cohere_trial",
       "lane": "cohere_trial",
       "handover_to": [
-        "aider/sambanova/Meta-Llama-3.3-70B-Instruct",
+        "agy/gemini-3.8-flash-high",
         "opencode/google/gemini-3-flash-preview",
-        "agy/gemini-3.8-flash-medium",
+        "aider/cloudflare/@cf/openai/gpt-oss-20b",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "agy/gemini-3.8-flash-high",
+      "cli": "agy",
+      "tier": "T3_code",
+      "intelligence": 72,
+      "role": "code",
+      "salary_dispatches": 2,
+      "quota_pool": "agy_antigravity",
+      "lane": "agy_antigravity",
+      "handover_to": [
+        "opencode/cohere/c4ai-aya-expanse-32b",
+        "opencode/google/gemini-3-flash-preview",
+        "aider/cloudflare/@cf/openai/gpt-oss-20b",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "agy/gemini-3.8-flash-low",
+      "cli": "agy",
+      "tier": "T3_code",
+      "intelligence": 72,
+      "role": "code",
+      "salary_dispatches": 2,
+      "quota_pool": "agy_antigravity",
+      "lane": "agy_antigravity",
+      "handover_to": [
+        "opencode/cohere/c4ai-aya-expanse-32b",
+        "opencode/google/gemini-3-flash-preview",
+        "aider/cloudflare/@cf/openai/gpt-oss-20b",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "agy/gemini-3.8-flash-medium",
+      "cli": "agy",
+      "tier": "T3_code",
+      "intelligence": 72,
+      "role": "code",
+      "salary_dispatches": 2,
+      "quota_pool": "agy_antigravity",
+      "lane": "agy_antigravity",
+      "handover_to": [
+        "opencode/cohere/c4ai-aya-expanse-32b",
+        "opencode/google/gemini-3-flash-preview",
+        "aider/cloudflare/@cf/openai/gpt-oss-20b",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -578,11 +534,11 @@
       "lane": "cohere_trial",
       "handover_to": [
         "opencode/google/gemini-3-flash-preview",
-        "agy/gemini-3.8-flash-medium",
         "aider/cloudflare/@cf/openai/gpt-oss-20b",
+        "aider/nvidia_nim/openai/gpt-oss-20b",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -595,12 +551,12 @@
       "quota_pool": "gemini_direct",
       "lane": "gemini_direct",
       "handover_to": [
-        "agy/gemini-3.8-flash-medium",
         "aider/cloudflare/@cf/openai/gpt-oss-20b",
-        "aider/nvidia_nim/deepseek-ai/deepseek-v4.1-flash",
+        "aider/nvidia_nim/openai/gpt-oss-20b",
+        "opencode/glm-5.3-flash-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -613,12 +569,12 @@
       "quota_pool": "gemini_direct",
       "lane": "gemini_direct",
       "handover_to": [
-        "agy/gemini-3.8-flash-medium",
         "aider/cloudflare/@cf/openai/gpt-oss-20b",
-        "aider/nvidia_nim/deepseek-ai/deepseek-v4.1-flash",
+        "aider/nvidia_nim/openai/gpt-oss-20b",
+        "opencode/glm-5.3-flash-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -631,62 +587,12 @@
       "quota_pool": "gemini_direct",
       "lane": "gemini_direct",
       "handover_to": [
-        "agy/gemini-3.8-flash-medium",
         "aider/cloudflare/@cf/openai/gpt-oss-20b",
-        "aider/nvidia_nim/deepseek-ai/deepseek-v4.1-flash",
+        "aider/nvidia_nim/openai/gpt-oss-20b",
+        "opencode/glm-5.3-flash-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-3.7-flash",
-      "cli": "opencode",
-      "tier": "T3_code",
-      "intelligence": 72,
-      "role": "code",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "agy/gemini-3.8-flash-medium",
-        "aider/cloudflare/@cf/openai/gpt-oss-20b",
-        "aider/nvidia_nim/deepseek-ai/deepseek-v4.1-flash",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-3.8-flash",
-      "cli": "opencode",
-      "tier": "T3_code",
-      "intelligence": 72,
-      "role": "code",
-      "salary_dispatches": 30,
-      "quota_pool": "gemini_direct",
-      "lane": "ui-fallback",
-      "handover_to": [
-        "opencode/cohere/command-a-03-2025",
-        "opencode/cohere/north-mini-code:free",
-        "kilo/kilo-auto/free"
-      ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "agy/gemini-3.8-flash-medium",
-      "cli": "agy",
-      "tier": "T3_code",
-      "intelligence": 70,
-      "role": "code",
-      "salary_dispatches": 2,
-      "quota_pool": "agy_antigravity",
-      "lane": "ui",
-      "handover_to": [
-        "opencode/google/gemini-3.8-flash",
-        "opencode/cohere/command-a-03-2025",
-        "kilo/kilo-auto/free"
-      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -699,29 +605,66 @@
       "quota_pool": "cloudflare_free",
       "lane": "cloudflare_free",
       "handover_to": [
-        "aider/nvidia_nim/deepseek-ai/deepseek-v4.1-flash",
+        "aider/nvidia_nim/openai/gpt-oss-20b",
+        "opencode/glm-5.3-flash-free",
         "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-        "opencode/cohere/command-a-03-2025",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "aider/nvidia_nim/deepseek-ai/deepseek-v4.1-flash",
+      "id": "aider/cloudflare/@cf/qwen/qwen3-30b-a3b-fp8",
       "cli": "aider",
       "tier": "T3_code",
       "intelligence": 70,
       "role": "code",
-      "salary_dispatches": 15,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "aider-nim-code",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
       "handover_to": [
-        "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
-        "opencode/gemma-4-31b-it:free",
+        "aider/nvidia_nim/openai/gpt-oss-20b",
+        "opencode/glm-5.3-flash-free",
+        "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
         "kilo/kilo-auto/free"
       ],
-      "note": "NVIDIA NIM free; deepseek flash coder. zero-dollar.",
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/qwen/qwen3.8-27b",
+      "cli": "aider",
+      "tier": "T3_code",
+      "intelligence": 70,
+      "role": "code",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/openai/gpt-oss-20b",
+        "opencode/glm-5.3-flash-free",
+        "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/zai-org/glm-4.7-flash",
+      "cli": "aider",
+      "tier": "T3_code",
+      "intelligence": 70,
+      "role": "code",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/openai/gpt-oss-20b",
+        "opencode/glm-5.3-flash-free",
+        "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -734,12 +677,84 @@
       "quota_pool": "nvidia_nim_free",
       "lane": "nvidia_nim_free",
       "handover_to": [
+        "opencode/glm-5.3-flash-free",
+        "aider/cloudflare/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
         "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-        "opencode/cohere/command-a-03-2025",
-        "opencode/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/glm-5.3-flash-free",
+      "cli": "opencode",
+      "tier": "T3_code",
+      "intelligence": 70,
+      "role": "code",
+      "salary_dispatches": 10,
+      "quota_pool": "opencode_gateway",
+      "lane": "opencode_gateway",
+      "handover_to": [
+        "aider/cloudflare/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+        "aider/nvidia_nim/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+      "cli": "aider",
+      "tier": "T3_code",
+      "intelligence": 68,
+      "role": "code",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "opencode/cohere/command-r-08-2024",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/qwen/qwen2.5-coder-32b-instruct",
+      "cli": "aider",
+      "tier": "T3_code",
+      "intelligence": 68,
+      "role": "code",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "opencode/cohere/command-r-08-2024",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/qwen/qwq-32b",
+      "cli": "aider",
+      "tier": "T3_code",
+      "intelligence": 68,
+      "role": "code",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "opencode/cohere/command-r-08-2024",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -753,11 +768,11 @@
       "lane": "nvidia_nim_free",
       "handover_to": [
         "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-        "opencode/cohere/command-a-03-2025",
-        "opencode/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "opencode/cohere/command-r-08-2024",
+        "opencode/nemotron-3.5-lightning-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -771,11 +786,11 @@
       "lane": "nvidia_nim_free",
       "handover_to": [
         "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-        "opencode/cohere/command-a-03-2025",
-        "opencode/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "opencode/cohere/command-r-08-2024",
+        "opencode/nemotron-3.5-lightning-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -788,12 +803,12 @@
       "quota_pool": "kilo_subscription",
       "lane": "kilo_subscription",
       "handover_to": [
-        "opencode/cohere/command-a-03-2025",
+        "opencode/cohere/command-r-08-2024",
+        "opencode/nemotron-3.5-lightning-free",
         "opencode/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-        "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -806,28 +821,12 @@
       "quota_pool": "kilo_subscription",
       "lane": "kilo_subscription",
       "handover_to": [
-        "opencode/cohere/command-a-03-2025",
+        "opencode/cohere/command-r-08-2024",
+        "opencode/nemotron-3.5-lightning-free",
         "opencode/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-        "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/cohere/command-a-03-2025",
-      "cli": "opencode",
-      "tier": "T3_code",
-      "intelligence": 66,
-      "role": "code",
-      "salary_dispatches": 15,
-      "quota_pool": "cohere_trial",
-      "lane": "tests-fallback",
-      "handover_to": [
-        "opencode/cohere/north-mini-code:free",
-        "opencode/gemma-4-31b-it:free",
-        "kilo/kilo-auto/free"
-      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -840,12 +839,30 @@
       "quota_pool": "cohere_trial",
       "lane": "cohere_trial",
       "handover_to": [
+        "opencode/nemotron-3.5-lightning-free",
         "opencode/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
         "kilo/poolside/laguna-s-2.1:free",
-        "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/nemotron-3.5-lightning-free",
+      "cli": "opencode",
+      "tier": "T3_code",
+      "intelligence": 66,
+      "role": "code",
+      "salary_dispatches": 10,
+      "quota_pool": "opencode_gateway",
+      "lane": "opencode_gateway",
+      "handover_to": [
+        "opencode/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "kilo/poolside/laguna-s-2.1:free",
+        "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -859,11 +876,11 @@
       "lane": "openrouter_free",
       "handover_to": [
         "kilo/poolside/laguna-s-2.1:free",
-        "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
-        "opencode/cohere/north-mini-code-1.0",
+        "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
+        "aider/nvidia_nim/nvidia/ising-calibration-1.5-31b",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -877,11 +894,11 @@
       "lane": "openrouter_free",
       "handover_to": [
         "kilo/poolside/laguna-s-2.1:free",
-        "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
-        "opencode/cohere/north-mini-code-1.0",
+        "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
+        "aider/nvidia_nim/nvidia/ising-calibration-1.5-31b",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -895,11 +912,11 @@
       "lane": "kilo_subscription",
       "handover_to": [
         "opencode/poolside/laguna-s-2.1:free",
-        "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
-        "opencode/cohere/north-mini-code-1.0",
+        "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
+        "aider/nvidia_nim/nvidia/ising-calibration-1.5-31b",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -912,28 +929,66 @@
       "quota_pool": "openrouter_free",
       "lane": "openrouter_free",
       "handover_to": [
-        "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
+        "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
+        "aider/nvidia_nim/nvidia/ising-calibration-1.5-31b",
         "kilo/cohere/north-mini-code:free",
-        "opencode/cohere/north-mini-code-1.0",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "aider/nvidia_nim/mistralai/codestral-22b-instruct-v0.1",
+      "id": "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
       "cli": "aider",
       "tier": "T3_code",
       "intelligence": 62,
       "role": "code",
-      "salary_dispatches": 15,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "aider-nim-code",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
       "handover_to": [
-        "opencode/gemma-4-31b-it:free",
+        "aider/nvidia_nim/nvidia/ising-calibration-1.5-31b",
+        "kilo/cohere/north-mini-code:free",
+        "opencode/cohere/north-mini-code-1.0",
         "kilo/kilo-auto/free"
       ],
-      "note": "NVIDIA NIM free; codestral. zero-dollar.",
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/mistralai/mistral-small-3.1-24b-instruct",
+      "cli": "aider",
+      "tier": "T3_code",
+      "intelligence": 62,
+      "role": "code",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/ising-calibration-1.5-31b",
+        "kilo/cohere/north-mini-code:free",
+        "opencode/cohere/north-mini-code-1.0",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/nvidia_nim/nvidia/ising-calibration-1.5-31b",
+      "cli": "aider",
+      "tier": "T3_code",
+      "intelligence": 62,
+      "role": "code",
+      "salary_dispatches": 10,
+      "quota_pool": "nvidia_nim_free",
+      "lane": "nvidia_nim_free",
+      "handover_to": [
+        "kilo/cohere/north-mini-code:free",
+        "opencode/cohere/north-mini-code-1.0",
+        "opencode/cohere/north-mini-code:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -947,11 +1002,11 @@
       "lane": "kilo_subscription",
       "handover_to": [
         "opencode/cohere/north-mini-code-1.0",
-        "opencode/dots-studio/dots-3-note-preview:free",
-        "opencode/google/gemini-2.5-flash-lite",
+        "opencode/cohere/north-mini-code:free",
+        "opencode/flint-40b-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -965,11 +1020,11 @@
       "lane": "kilo_subscription",
       "handover_to": [
         "opencode/cohere/north-mini-code-1.0",
-        "opencode/dots-studio/dots-3-note-preview:free",
-        "opencode/google/gemini-2.5-flash-lite",
+        "opencode/cohere/north-mini-code:free",
+        "opencode/flint-40b-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -982,12 +1037,30 @@
       "quota_pool": "cohere_trial",
       "lane": "cohere_trial",
       "handover_to": [
-        "opencode/dots-studio/dots-3-note-preview:free",
-        "opencode/google/gemini-2.5-flash-lite",
-        "aider/nvidia_nim/google/gemma-4-31b-it",
+        "opencode/cohere/north-mini-code:free",
+        "opencode/flint-40b-free",
+        "aider/sambanova/gemma-4-31B-it",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/cohere/north-mini-code:free",
+      "cli": "opencode",
+      "tier": "T3_code",
+      "intelligence": 62,
+      "role": "code",
+      "salary_dispatches": 6,
+      "quota_pool": "openrouter_free",
+      "lane": "openrouter_free",
+      "handover_to": [
+        "opencode/flint-40b-free",
+        "aider/sambanova/gemma-4-31B-it",
+        "kilo/xingchen-agi/xing4.0-29b-a4b:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1000,48 +1073,30 @@
       "quota_pool": "openrouter_free",
       "lane": "openrouter_free",
       "handover_to": [
-        "opencode/google/gemini-2.5-flash-lite",
-        "aider/nvidia_nim/google/gemma-4-31b-it",
+        "opencode/flint-40b-free",
         "aider/sambanova/gemma-4-31B-it",
+        "kilo/xingchen-agi/xing4.0-29b-a4b:free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "opencode/google/gemini-2.5-flash-lite",
+      "id": "opencode/flint-40b-free",
       "cli": "opencode",
       "tier": "T3_code",
       "intelligence": 62,
       "role": "code",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "aider/nvidia_nim/google/gemma-4-31b-it",
-        "aider/sambanova/gemma-4-31B-it",
-        "kilo/xingchen-agi/xing4.0-29b-a4b:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/google/gemma-4-31b-it",
-      "cli": "aider",
-      "tier": "T3_code",
-      "intelligence": 60,
-      "role": "code",
       "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
+      "quota_pool": "opencode_gateway",
+      "lane": "opencode_gateway",
       "handover_to": [
         "aider/sambanova/gemma-4-31B-it",
         "kilo/xingchen-agi/xing4.0-29b-a4b:free",
-        "opencode/cohere/north-mini-code:free",
+        "opencode/google/gemini-3.1-flash-lite",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1055,11 +1110,11 @@
       "lane": "sambanova_free",
       "handover_to": [
         "kilo/xingchen-agi/xing4.0-29b-a4b:free",
-        "opencode/cohere/north-mini-code:free",
         "opencode/google/gemini-3.1-flash-lite",
+        "opencode/google/gemma-4-31b-it:free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1072,28 +1127,12 @@
       "quota_pool": "kilo_subscription",
       "lane": "kilo_subscription",
       "handover_to": [
-        "opencode/cohere/north-mini-code:free",
         "opencode/google/gemini-3.1-flash-lite",
-        "opencode/cohere/command-r7b-12-2024",
+        "opencode/google/gemma-4-31b-it:free",
+        "opencode/beam-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/cohere/north-mini-code:free",
-      "cli": "opencode",
-      "tier": "T3_code",
-      "intelligence": 60,
-      "role": "code",
-      "salary_dispatches": 8,
-      "quota_pool": "openrouter_free",
-      "lane": "tests",
-      "handover_to": [
-        "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
-        "opencode/gemma-4-31b-it:free",
-        "kilo/kilo-auto/free"
-      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1107,11 +1146,11 @@
       "lane": "gemini_direct",
       "handover_to": [
         "opencode/google/gemma-4-31b-it:free",
-        "opencode/cohere/command-r7b-12-2024",
-        "agy/gemini-3.8-flash-low",
+        "kilo/reflection/beam-free",
+        "opencode/beam-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1125,11 +1164,11 @@
       "lane": "gemini_direct",
       "handover_to": [
         "opencode/google/gemma-4-31b-it:free",
-        "opencode/cohere/command-r7b-12-2024",
-        "agy/gemini-3.8-flash-low",
+        "kilo/reflection/beam-free",
+        "opencode/beam-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1143,11 +1182,11 @@
       "lane": "gemini_direct",
       "handover_to": [
         "opencode/google/gemma-4-31b-it:free",
-        "opencode/cohere/command-r7b-12-2024",
-        "agy/gemini-3.8-flash-low",
+        "kilo/reflection/beam-free",
+        "opencode/beam-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1161,11 +1200,11 @@
       "lane": "gemini_direct",
       "handover_to": [
         "opencode/google/gemma-4-31b-it:free",
-        "opencode/cohere/command-r7b-12-2024",
-        "agy/gemini-3.8-flash-low",
+        "kilo/reflection/beam-free",
+        "opencode/beam-free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1178,12 +1217,12 @@
       "quota_pool": "openrouter_free",
       "lane": "openrouter_free",
       "handover_to": [
+        "kilo/reflection/beam-free",
+        "opencode/beam-free",
         "opencode/cohere/command-r7b-12-2024",
-        "agy/gemini-3.8-flash-low",
-        "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1196,77 +1235,66 @@
       "quota_pool": "openrouter_free",
       "lane": "openrouter_free",
       "handover_to": [
+        "kilo/reflection/beam-free",
+        "opencode/beam-free",
         "opencode/cohere/command-r7b-12-2024",
-        "agy/gemini-3.8-flash-low",
-        "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
-      "cli": "aider",
+      "id": "kilo/reflection/beam-free",
+      "cli": "kilo",
       "tier": "T4_grind",
-      "intelligence": 77,
+      "intelligence": 58,
       "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "openrouter_free",
-      "lane": "patch",
+      "salary_dispatches": 12,
+      "quota_pool": "kilo_subscription",
+      "lane": "kilo_subscription",
       "handover_to": [
-        "opencode/gemma-4-31b-it:free",
+        "opencode/beam-free",
+        "opencode/cohere/command-r7b-12-2024",
+        "aider/cloudflare/@cf/google/gemma-4-26b-a4b-it",
         "kilo/kilo-auto/free"
       ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "cline/nemotron-3-ultra-550b-a55b:free",
-      "cli": "cline",
-      "tier": "T4_grind",
-      "intelligence": 77,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "openrouter_free",
-      "lane": "grind",
-      "handover_to": [
-        "aider/openrouter/nemotron-3-ultra-550b-a55b:free",
-        "opencode/gemma-4-31b-it:free",
-        "kilo/kilo-auto/free"
-      ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/sambanova/Meta-Llama-3.3-70B-Instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 72,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "sambanova_free",
-      "lane": "aider-sn",
-      "handover_to": [
-        "opencode/gemma-4-31b-it:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "SambaNova free; llama 3.3 70b. throttle-prone.",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/thinkingmachines/inkling:free",
+      "id": "opencode/beam-free",
       "cli": "opencode",
       "tier": "T4_grind",
       "intelligence": 58,
       "role": "grind",
-      "salary_dispatches": 6,
-      "quota_pool": "openrouter_free",
-      "lane": "openrouter_free",
+      "salary_dispatches": 10,
+      "quota_pool": "opencode_gateway",
+      "lane": "opencode_gateway",
       "handover_to": [
         "opencode/cohere/command-r7b-12-2024",
-        "agy/gemini-3.8-flash-low",
-        "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
+        "aider/cloudflare/@cf/google/gemma-4-26b-a4b-it",
+        "kilo/recursive/flint-v1.0:free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/mimo-v2.6-flash-free",
+      "cli": "opencode",
+      "tier": "T4_grind",
+      "intelligence": 58,
+      "role": "grind",
+      "salary_dispatches": 10,
+      "quota_pool": "opencode_gateway",
+      "lane": "opencode_gateway",
+      "handover_to": [
+        "opencode/cohere/command-r7b-12-2024",
+        "aider/cloudflare/@cf/google/gemma-4-26b-a4b-it",
+        "kilo/recursive/flint-v1.0:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1279,164 +1307,12 @@
       "quota_pool": "cohere_trial",
       "lane": "cohere_trial",
       "handover_to": [
-        "agy/gemini-3.8-flash-low",
-        "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
-        "aider/nvidia_nim/01-ai/yi-large",
+        "aider/cloudflare/@cf/google/gemma-4-26b-a4b-it",
+        "kilo/recursive/flint-v1.0:free",
+        "opencode/google/gemma-4-26b-a4b-it:free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "agy/gemini-3.8-flash-low",
-      "cli": "agy",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 2,
-      "quota_pool": "agy_antigravity",
-      "lane": "fast",
-      "handover_to": [
-        "opencode/google/gemini-3.8-flash",
-        "opencode/gemma-4-31b-it:free",
-        "kilo/kilo-auto/free"
-      ],
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/cloudflare/clairic",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/cloudflare/clef",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/cloudflare/clef-flash",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/cloudflare/clef-omni",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/daily-co/phonellm-mini-alpha-2",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/google/gemma-2b-it-lora",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -1449,1251 +1325,12 @@
       "quota_pool": "cloudflare_free",
       "lane": "cloudflare_free",
       "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/google/gemma-7b-it-lora",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/ibm-granite/granite-4.0-h-micro",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/meta-llama/llama-2-7b-chat-hf-lora",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/meta/llama-3.1-8b-instruct-fp8",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/meta/llama-3.2-1b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/meta/llama-3.2-3b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/meta/llama-4-scout-17b-16e-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/mistral/mistral-7b-instruct-v0.2-lora",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/mistralai/mistral-small-3.1-24b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/moonshotai/kimi-k2.6",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/moonshotai/kimi-k2.7-code",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/nvidia/nemotron-3-120b-a12b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/qwen/qwen2.5-coder-32b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/qwen/qwen3-30b-a3b-fp8",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/qwen/qwen3.8-27b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/qwen/qwq-32b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/swiss-ai/apertus-v1.5-8b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/utter-project/eurollm-9b-it",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/zai-org/glm-4.7-flash",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/zai-org/glm-5.2",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/zai-org/glm-5.3",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/cloudflare/@cf/zai-org/glm-5.3-flash",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 8,
-      "quota_pool": "cloudflare_free",
-      "lane": "cloudflare_free",
-      "handover_to": [
-        "aider/nvidia_nim/01-ai/yi-large",
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/01-ai/yi-large",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/adept/fuyu-8b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/ai21labs/jamba-1.5-large-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/aisingapore/sea-lion-7b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/bigcode/starcoder2-15b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/databricks/dbrx-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/deepseek-ai/deepseek-coder-6.7b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/google/codegemma-1.1-7b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/google/codegemma-7b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/google/deplot",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/google/diffusiongemma-26b-a4b-it",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/google/gemma-2b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/google/gemma-3-12b-it",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/google/gemma-3-4b-it",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/google/recurrentgemma-2b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/ibm/granite-3.0-3b-a800m-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/ibm/granite-3.0-8b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/ibm/granite-34b-code-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/ibm/granite-8b-code-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/meta/codellama-70b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/meta/llama2-70b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/meta/muse-glimmer-30b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/microsoft/kosmos-2",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/microsoft/phi-3.5-moe-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/mistralai/mistral-7b-instruct-v0.3",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/mistralai/mistral-large",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/mistralai/mistral-large-2-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/mistralai/mistral-large-4-1t-a52b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/mistralai/mixtral-8x22b-v0.1",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/moonshotai/kimi-k2.6",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nv-mistralai/mistral-nemo-12b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/ai-synthetic-video-detector",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/cosmos-reason2-8b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/ising-calibration-1.5-31b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/llama-3.1-nemotron-51b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/llama-3.1-nemotron-ultra-253b-v1",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/llama3-chatqa-1.5-70b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/mistral-nemo-minitron-8b-8k-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/nemotron-3.5-bolt-e4b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/nemotron-4-340b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/nemotron-nano-3-30b-a3b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/neva-22b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/nvidia/vila",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/stepfun-ai/step-5-preview",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/writer/palmyra-creative-122b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/writer/palmyra-fin-70b-32k",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/writer/palmyra-med-70b",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/writer/palmyra-med-70b-32k",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/z-ai/glm-5.3-flash",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "aider/nvidia_nim/zyphra/zamba2-7b-instruct",
-      "cli": "aider",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 10,
-      "quota_pool": "nvidia_nim_free",
-      "lane": "nvidia_nim_free",
-      "handover_to": [
-        "kilo/kilo-auto/free",
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "kilo/kilo-auto/free",
-      "cli": "kilo",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "kilo_subscription",
-      "lane": "kilo",
-      "handover_to": [
-        "opencode/cohere/command-a-03-2025",
-        "opencode/gemma-4-31b-it:free"
-      ],
-      "note": "Kilo Gateway free auto-router (oauth, zero-dollar, no env keys)",
+        "kilo/recursive/flint-v1.0:free",
+        "opencode/google/gemma-4-26b-a4b-it:free",
+        "aider/nvidia_nim/poolside/laguna-xs-2.1",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -2706,300 +1343,12 @@
       "quota_pool": "kilo_subscription",
       "lane": "kilo_subscription",
       "handover_to": [
-        "opencode/google/antigravity-preview-05-2026",
         "opencode/google/gemma-4-26b-a4b-it:free",
+        "aider/cloudflare/@cf/google/gemma-7b-it-lora",
         "aider/nvidia_nim/poolside/laguna-xs-2.1",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "kilo/reflection/beam-free",
-      "cli": "kilo",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "kilo_subscription",
-      "lane": "kilo_subscription",
-      "handover_to": [
-        "opencode/google/antigravity-preview-05-2026",
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/antigravity-preview-05-2026",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/antigravity-preview-09-2026",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/antigravity-preview-latest",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/deep-research-max-preview-04-2026",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/deep-research-preview-04-2026",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/deep-research-pro-preview-12-2025",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-3.5-transcribe",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-flash-latest",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-flash-lite-latest",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-nano-banana-2.1",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-omni-1.1-flash",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-omni-flash-preview",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-pro-latest",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemini-robotics-er-2-preview",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/gemma-4-26b-a4b-it",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/google/gemma-4-26b-a4b-it:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3012,30 +1361,12 @@
       "quota_pool": "openrouter_free",
       "lane": "openrouter_free",
       "handover_to": [
-        "opencode/google/nano-banana-pro-preview",
+        "aider/cloudflare/@cf/google/gemma-7b-it-lora",
         "aider/nvidia_nim/poolside/laguna-xs-2.1",
         "kilo/poolside/laguna-xs-2.1:free",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
-      "cost_salary_usd": 0.01
-    },
-    {
-      "id": "opencode/google/nano-banana-pro-preview",
-      "cli": "opencode",
-      "tier": "T4_grind",
-      "intelligence": 55,
-      "role": "grind",
-      "salary_dispatches": 12,
-      "quota_pool": "gemini_direct",
-      "lane": "gemini_direct",
-      "handover_to": [
-        "opencode/recursive/flint-v1.0:free",
-        "aider/nvidia_nim/poolside/laguna-xs-2.1",
-        "kilo/poolside/laguna-xs-2.1:free",
-        "kilo/kilo-auto/free"
-      ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3048,12 +1379,84 @@
       "quota_pool": "openrouter_free",
       "lane": "openrouter_free",
       "handover_to": [
+        "aider/cloudflare/@cf/google/gemma-7b-it-lora",
         "aider/nvidia_nim/poolside/laguna-xs-2.1",
         "kilo/poolside/laguna-xs-2.1:free",
-        "opencode/cohere/tiny-aya-earth",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/google/gemma-7b-it-lora",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 54,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/poolside/laguna-xs-2.1",
+        "kilo/poolside/laguna-xs-2.1:free",
+        "opencode/poolside/laguna-xs-2.1:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/meta-llama/llama-2-7b-chat-hf-lora",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 54,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/poolside/laguna-xs-2.1",
+        "kilo/poolside/laguna-xs-2.1:free",
+        "opencode/poolside/laguna-xs-2.1:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/meta/llama-3.1-8b-instruct-fp8",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 54,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/poolside/laguna-xs-2.1",
+        "kilo/poolside/laguna-xs-2.1:free",
+        "opencode/poolside/laguna-xs-2.1:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/mistral/mistral-7b-instruct-v0.2-lora",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 54,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/poolside/laguna-xs-2.1",
+        "kilo/poolside/laguna-xs-2.1:free",
+        "opencode/poolside/laguna-xs-2.1:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3068,10 +1471,10 @@
       "handover_to": [
         "kilo/poolside/laguna-xs-2.1:free",
         "opencode/poolside/laguna-xs-2.1:free",
-        "opencode/cohere/tiny-aya-earth",
+        "aider/cloudflare/@cf/daily-co/phonellm-mini-alpha-2",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3085,10 +1488,11 @@
       "lane": "kilo_subscription",
       "handover_to": [
         "opencode/poolside/laguna-xs-2.1:free",
-        "opencode/cohere/tiny-aya-earth",
+        "aider/cloudflare/@cf/daily-co/phonellm-mini-alpha-2",
+        "aider/nvidia_nim/nvidia/nemotron-3.5-bolt-e4b",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3101,30 +1505,224 @@
       "quota_pool": "openrouter_free",
       "lane": "openrouter_free",
       "handover_to": [
-        "kilo/liquid/lfm-2.5-2.6b:free",
-        "opencode/cohere/tiny-aya-earth",
+        "aider/cloudflare/@cf/daily-co/phonellm-mini-alpha-2",
+        "aider/nvidia_nim/nvidia/nemotron-3.5-bolt-e4b",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "opencode/gemma-4-31b-it:free",
+      "id": "aider/cloudflare/@cf/daily-co/phonellm-mini-alpha-2",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/nemotron-3.5-bolt-e4b",
+        "kilo/kilo-auto/free",
+        "opencode/google/gemini-3.5-transcribe"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/google/gemma-2b-it-lora",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/nemotron-3.5-bolt-e4b",
+        "kilo/kilo-auto/free",
+        "opencode/google/gemini-3.5-transcribe"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/ibm-granite/granite-4.0-h-micro",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/nemotron-3.5-bolt-e4b",
+        "kilo/kilo-auto/free",
+        "opencode/google/gemini-3.5-transcribe"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/meta/llama-3.2-1b-instruct",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/nemotron-3.5-bolt-e4b",
+        "kilo/kilo-auto/free",
+        "opencode/google/gemini-3.5-transcribe"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/cloudflare/@cf/meta/llama-3.2-3b-instruct",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 8,
+      "quota_pool": "cloudflare_free",
+      "lane": "cloudflare_free",
+      "handover_to": [
+        "aider/nvidia_nim/nvidia/nemotron-3.5-bolt-e4b",
+        "kilo/kilo-auto/free",
+        "opencode/google/gemini-3.5-transcribe"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "aider/nvidia_nim/nvidia/nemotron-3.5-bolt-e4b",
+      "cli": "aider",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 10,
+      "quota_pool": "nvidia_nim_free",
+      "lane": "nvidia_nim_free",
+      "handover_to": [
+        "kilo/kilo-auto/free",
+        "opencode/google/gemini-3.5-transcribe",
+        "opencode/nemotron-3.5-super-vl-free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "kilo/kilo-auto/free",
+      "cli": "kilo",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 12,
+      "quota_pool": "kilo_subscription",
+      "lane": "kilo_subscription",
+      "handover_to": [
+        "opencode/google/gemini-3.5-transcribe",
+        "opencode/nemotron-3.5-super-vl-free",
+        "opencode/nvidia/nemotron-3.5-super-vl:free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "kilo/nvidia/nemotron-3.5-super-vl:free",
+      "cli": "kilo",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 12,
+      "quota_pool": "kilo_subscription",
+      "lane": "kilo_subscription",
+      "handover_to": [
+        "opencode/google/gemini-3.5-transcribe",
+        "opencode/nemotron-3.5-super-vl-free",
+        "opencode/nvidia/nemotron-3.5-super-vl:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/google/gemini-3.5-transcribe",
+      "cli": "opencode",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 12,
+      "quota_pool": "gemini_direct",
+      "lane": "gemini_direct",
+      "handover_to": [
+        "opencode/nemotron-3.5-super-vl-free",
+        "opencode/nvidia/nemotron-3.5-super-vl:free",
+        "kilo/liquid/lfm-2.5-2.6b:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/google/gemini-flash-lite-latest",
+      "cli": "opencode",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 12,
+      "quota_pool": "gemini_direct",
+      "lane": "gemini_direct",
+      "handover_to": [
+        "opencode/nemotron-3.5-super-vl-free",
+        "opencode/nvidia/nemotron-3.5-super-vl:free",
+        "kilo/liquid/lfm-2.5-2.6b:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/google/gemini-robotics-er-2-preview",
+      "cli": "opencode",
+      "tier": "T4_grind",
+      "intelligence": 50,
+      "role": "grind",
+      "salary_dispatches": 12,
+      "quota_pool": "gemini_direct",
+      "lane": "gemini_direct",
+      "handover_to": [
+        "opencode/nemotron-3.5-super-vl-free",
+        "opencode/nvidia/nemotron-3.5-super-vl:free",
+        "kilo/liquid/lfm-2.5-2.6b:free",
+        "kilo/kilo-auto/free"
+      ],
+      "note": "live-tiered",
+      "cost_salary_usd": 0.01
+    },
+    {
+      "id": "opencode/nemotron-3.5-super-vl-free",
       "cli": "opencode",
       "tier": "T4_grind",
       "intelligence": 50,
       "role": "grind",
       "salary_dispatches": 10,
-      "quota_pool": "openrouter_free",
-      "lane": "fast-fallback",
+      "quota_pool": "opencode_gateway",
+      "lane": "opencode_gateway",
       "handover_to": [
-        "cline/nemotron-3-ultra-550b-a55b:free",
+        "opencode/nvidia/nemotron-3.5-super-vl:free",
+        "kilo/liquid/lfm-2.5-2.6b:free",
+        "opencode/cohere/tiny-aya-earth",
         "kilo/kilo-auto/free"
       ],
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
-      "id": "opencode/thinkingmachines/inkling-small:free",
+      "id": "opencode/nvidia/nemotron-3.5-super-vl:free",
       "cli": "opencode",
       "tier": "T4_grind",
       "intelligence": 50,
@@ -3137,7 +1735,7 @@
         "opencode/cohere/tiny-aya-earth",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3154,7 +1752,7 @@
         "opencode/cohere/tiny-aya-earth",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3170,7 +1768,7 @@
         "opencode/cohere/tiny-aya-earth",
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3185,7 +1783,7 @@
       "handover_to": [
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3200,7 +1798,7 @@
       "handover_to": [
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3215,7 +1813,7 @@
       "handover_to": [
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     },
     {
@@ -3230,7 +1828,7 @@
       "handover_to": [
         "kilo/kilo-auto/free"
       ],
-      "note": "auto-tiered free model",
+      "note": "live-tiered",
       "cost_salary_usd": 0.01
     }
   ],

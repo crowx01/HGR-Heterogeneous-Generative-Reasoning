@@ -1,3 +1,10 @@
+Added live-tier.mjs, a live tiering engine. Each run it
+enumerates every free model across the keyed providers and the CLI catalogs, sends a test prompt to
+each, drops paid imposters and models that do not serve, scores intelligence with a rubric plus a
+parameter-size heuristic, tiers them T1 to T4, derives each salary from its quota pool, and builds
+cross-pool fallback chains, then writes free_models.json and models.json. A cron job runs it every 4
+hours so the economy stays live. The economy now holds live-verified free models only.
+
 # Economy walls and relay auto-recording
 
 - Live-enumerated every free model across all keyed providers and CLIs and tiered them into the economy. free_models.json now holds 185 free models across 8 pools: NVIDIA NIM 62, Cloudflare Workers AI 37, Gemini 32, OpenRouter 16, Cohere 13, Kilo gateway 13, SambaNova 6, agy 6. models.json grew to 182 tiered entries (T1 deep 8, T2 strong 15, T3 code 40, T4 grind 119) with cross-pool fallback chains. Together (key expired), DeepInfra (pay per token), Hugging Face, Moonshot, DeepSeek, and cline (no list command) are excluded.

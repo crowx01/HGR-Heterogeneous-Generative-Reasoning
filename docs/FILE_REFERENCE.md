@@ -38,6 +38,15 @@ The salary and quota ledger CLI. Node, no dependencies. Run as `node engine/econ
 
 The parallel fan-out engine. Given one brief, it dispatches that brief to several fleet lanes at once and collects every result into one file.
 
+## engine/live-tier.mjs
+
+The live tiering engine. Enumerates free models across keyed providers and CLI catalogs, probes each
+with a test prompt, drops paid imposters and non-serving models, scores intelligence (rubric plus a
+parameter-size heuristic), tiers T1 to T4, derives salary from each quota pool, builds cross-pool
+fallback chains, and rewrites free_models.json and models.json. Reads provider keys from the local
+env file at runtime. Flags: --no-probe (skip probing), --dry (preview without writing). Intended to
+run on a schedule (for example cron every 4 hours).
+
 ### CLI
 `node engine/consensus.mjs --brief <file> --lanes <l1,l2,...> [--cd <dir>] [--out-dir <dir>] [--timeout <dur>] [--mission <name>]`
 - `--brief <file>`: required, the brief text file.
