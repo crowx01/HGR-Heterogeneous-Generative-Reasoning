@@ -56,7 +56,7 @@ crush models
 ```
 
 ### kilo (Kilo Code CLI)
-Install with `npm i -g @kilocode/cli`, then authenticate with `kilo auth login`. Kilo is a fork of opencode. It authenticates through its own login and does not use environment API keys (only aider uses environment keys).
+Install with `npm i -g @kilocode/cli`, then authenticate with `kilo auth login`. Kilo is a fork of opencode. It authenticates through its own login and does not use environment API keys (only aider uses environment keys). Use its free models (for example `kilo/kilo-auto/free`); the `kilo/~...-latest` hosted aliases need paid Kilo Gateway credits.
 
 ## Verify the install
 Run the test suite:

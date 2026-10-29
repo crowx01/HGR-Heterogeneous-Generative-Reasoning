@@ -58,7 +58,7 @@
     },
     "kilo": {
       "implementer": "kilo",
-      "model": "kilo/~google/gemini-flash-latest"
+      "model": "kilo/kilo-auto/free"
     }
   }
 }

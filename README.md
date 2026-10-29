@@ -77,7 +77,7 @@ Install from the Antigravity CLI docs and complete first-launch auth, then verif
 Install per the Crush project docs (a package manager or `go install`), then verify with `crush models`. It edits files in the working directory like opencode and has no `*-delegate` lane, so it is invoked directly.
 
 ### kilo (Kilo Code CLI)
-Install with `npm i -g @kilocode/cli`, then `kilo auth login`. Needs Node 18+. Kilo is a fork of opencode and shares its command set. It authenticates through its own login and does not use environment API keys (only aider uses environment keys).
+Install with `npm i -g @kilocode/cli`, then `kilo auth login`. Needs Node 18+. Kilo is a fork of opencode and shares its command set. It authenticates through its own login and does not use environment API keys (only aider uses environment keys). Use its free models (for example `kilo/kilo-auto/free`); the `kilo/~...-latest` hosted aliases need paid Kilo Gateway credits.
 
 ## Wire them to the orchestrator
 

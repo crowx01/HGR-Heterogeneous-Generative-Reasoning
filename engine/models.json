@@ -50,12 +50,12 @@
     },
     "kilo_subscription": {
       "window": "unknown",
-      "limit": "Kilo Code account credits / free tier",
+      "limit": "Kilo Gateway free tier (oauth, no env keys)",
       "shared_by": [
         "kilo"
       ],
-      "source": "kilo auth list (own store ~/.local/share/kilo/auth.json)",
-      "note": "native kilo/ provider, authenticated by `kilo auth login`, NOT env API keys"
+      "source": "kilo auth list (Kilo Gateway oauth); free models from gateway /models",
+      "note": "authenticated via `kilo auth login`, NOT env API keys; use free models (kilo/kilo-auto/free, :free). The kilo/~*-latest hosted aliases need PAID credits, do not use."
     }
   },
   "tiers": {
@@ -299,10 +299,10 @@
       "cost_salary_usd": 0.01
     },
     {
-      "id": "kilo/~google/gemini-flash-latest",
+      "id": "kilo/kilo-auto/free",
       "cli": "kilo",
       "tier": "T4_grind",
-      "intelligence": 45,
+      "intelligence": 55,
       "role": "grind",
       "salary_dispatches": 12,
       "quota_pool": "kilo_subscription",
@@ -310,7 +310,7 @@
       "handover_to": [
         "opencode/cohere/command-a-03-2025"
       ],
-      "note": "Kilo Code native provider; requires `kilo auth login` (0 credentials until then, dispatches hand over)",
+      "note": "Kilo Gateway free auto-router (oauth, zero-dollar, no env keys)",
       "cost_salary_usd": 0.01
     }
   ],
