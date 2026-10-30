@@ -1,0 +1,10 @@
+{
+  "_doc": "Per-mission salary ledger. Orchestrator copies this to ledger.<mission-id>.json at mission start, increments dispatches[model] before each delegate call, and triggers handover when dispatches >= salary_dispatches (from models.json) or a 429/choke is seen.",
+  "mission_id": "",
+  "started": "",
+  "objective": "",
+  "dispatches": {},
+  "chokes": [],
+  "handovers": [],
+  "status": "active"
+}
