@@ -62,13 +62,13 @@ node engine/economy.test.mjs
 All tests should pass. Then, run a no-spend pick:
 
 ```
-node engine/economy.mjs pick --role deep --mission demo
+node engine/mission.mjs --brief brief.json --role deep --mission demo
 ```
 
 This should return a JSON line naming a model. You can also run:
 
 ```
-node engine/economy.mjs status --mission demo
+node engine/route.mjs --json
 ```
 
 to see the ledger.

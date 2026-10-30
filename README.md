@@ -8,6 +8,8 @@ In the myth, Demeter's grief for her daughter freezes the world while Persephone
 
 HGR (Heterogeneous Generative Reasoning) is an orchestration layer. One high-capability orchestrator model (the "Harmony Master") takes a goal, splits it into subtasks, and routes each subtask to the cheapest model that can do it. It spreads work across several different coding-agent CLIs and model providers. A small economy meters spend against real provider quotas so a run cannot silently drain a shared pool. Independent subtasks can be fanned out in parallel, and critical judgments can be sent to several models to debate. The orchestrator verifies, arbitrates between answers by evidence, and synthesizes the result. The orchestrator routes and judges. It does not do the grind work itself.
 
+The current flow is as follows: pre-dispatch auto-routing (route.mjs refreshes pool_status and substitutes away from dead pools), the salary+handover mission driver (mission.mjs), the critical-file guard (guard.mjs), and that dispatched models run real tools rather than simulate.
+
 ## What it is
 
 A framework for decomposing a task into subtasks, routing each subtask to a generative model across many CLIs and providers, metering the spend, and arbitrating the results. The name reads as heterogeneous (many different models and CLIs), generative (they generate the work), reasoning (the orchestrator reasons about decomposition, routing, and arbitration).
@@ -53,6 +55,8 @@ For a step-by-step setup, see [docs/INSTALLATION.md](docs/INSTALLATION.md).
 Install Node 18+, then the CLIs you want in the fleet (opencode, aider, cline, agy, kilo). Point the engine at its config directory with `CONFIG_DIR` (default `/home/kali/.config/delegate-skills`). Then:
 
 ```
+node engine/mission.mjs --brief brief.json --role deep --mission demo
+node engine/route.mjs --json
 node engine/economy.mjs pick   --role deep --mission demo
 node engine/consensus.mjs --brief brief.txt --lanes patch,tests,fast --mission demo
 ```
@@ -102,7 +106,11 @@ Full detail, including every function and CLI command, is in [docs/FILE_REFERENC
 | --- | --- |
 | [engine/config.json](docs/FILE_REFERENCE.md#engineconfigjson) | The lane map: lane name to implementer CLI and model. |
 | [engine/economy.mjs](docs/FILE_REFERENCE.md#engineeconomymjs) | The salary and quota ledger CLI (pick, spend, choke, status). |
+| [engine/route.mjs](docs/FILE_REFERENCE.md#enginemodelsjson) | Pre-dispatch auto-routing: refreshes pool_status, picks best-UP per role, substitutes dead pools. |
+| [engine/mission.mjs](docs/FILE_REFERENCE.md#enginefree_modelsjson) | Drives salary + handover. |
+| [engine/guard.mjs](docs/FILE_REFERENCE.md#enginepool_statusjson) | The critical-file guard: restores models.json/config.json if a dispatch mutates them. |
 | [engine/consensus.mjs](docs/FILE_REFERENCE.md#engineconsensusmjs) | The parallel fan-out engine over fleet lanes. |
+| [engine/infer.mjs](docs/FILE_REFERENCE.md#engineledgertemplatejson) | Dispatched models run real tools rather than simulate. |
 | [engine/economy.test.mjs](docs/FILE_REFERENCE.md#engineeconomytestmjs) | Tests for the economy. |
 | [engine/models.json](docs/FILE_REFERENCE.md#enginemodelsjson) | Model intelligence and salary database, with quota pools and tiers. |
 | [engine/free_models.json](docs/FILE_REFERENCE.md#enginefree_modelsjson) | Wider roster of free models by pool. |

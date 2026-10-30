@@ -1,9 +1,20 @@
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, openSync, closeSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
 
 const CONFIG_DIR = process.env.CONFIG_DIR || '/home/kali/.config/delegate-skills';
 const MODELS_FILE = process.env.MODELS_FILE || join(CONFIG_DIR, 'models.json');
 const TEMPLATE_FILE = process.env.TEMPLATE_FILE || join(CONFIG_DIR, 'ledger.template.json');
+
+function withLock(mission, fn) {
+  const lock = ledgerPath(mission) + '.lock';
+  const sleep = (ms) => { try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); } catch {} };
+  for (let i = 0; i < 100; i++) {
+    let fd;
+    try { fd = openSync(lock, 'wx'); } catch (e) { if (e.code !== 'EEXIST') throw e; sleep(20); continue; }
+    try { return fn(); } finally { try { closeSync(fd); } catch {} try { unlinkSync(lock); } catch {} }
+  }
+  return fn(); // lock stuck ~2s: best-effort, proceed
+}
 
 function loadModels() {
   return JSON.parse(readFileSync(MODELS_FILE, 'utf8'));
@@ -192,25 +203,32 @@ async function cmdSpend(args) {
     process.exit(1);
   }
 
-  if (!isEligible(model, ledger, modelsData)) {
+  const result = withLock(mission, () => {
+    const ledger2 = loadLedger(mission);
+    if (!isEligible(model, ledger2, modelsData)) {
+      return { rejected: true };
+    }
+
+    ledger2.dispatches[modelId] = (ledger2.dispatches[modelId] || 0) + 1;
+    const cost = parseFloat(args['--cost']);
+    if (!Number.isNaN(cost)) {
+      ledger2.costs[modelId] = (ledger2.costs[modelId] || 0) + cost;
+    }
+    const tokens = parseInt(args['--tokens'], 10);
+    if (!Number.isNaN(tokens)) {
+      ledger2.tokens[modelId] = (ledger2.tokens[modelId] || 0) + tokens;
+    }
+    if (model.quota_pool) {
+      ledger2.pool_used[model.quota_pool] = (ledger2.pool_used[model.quota_pool] || 0) + 1;
+    }
+    saveLedger(mission, ledger2);
+    return { rejected: false, ledger2 };
+  });
+  if (result.rejected) {
     console.log(JSON.stringify({ model: null, reason: 'model not eligible' }));
     return;
   }
-
-  ledger.dispatches[modelId] = (ledger.dispatches[modelId] || 0) + 1;
-  const cost = parseFloat(args['--cost']);
-  if (!Number.isNaN(cost)) {
-    ledger.costs[modelId] = (ledger.costs[modelId] || 0) + cost;
-  }
-  const tokens = parseInt(args['--tokens'], 10);
-  if (!Number.isNaN(tokens)) {
-    ledger.tokens[modelId] = (ledger.tokens[modelId] || 0) + tokens;
-  }
-  if (model.quota_pool) {
-    ledger.pool_used[model.quota_pool] = (ledger.pool_used[model.quota_pool] || 0) + 1;
-  }
-  saveLedger(mission, ledger);
-  console.log(JSON.stringify(formatPick(model, ledger, modelsData)));
+  console.log(JSON.stringify(formatPick(model, result.ledger2, modelsData)));
 }
 
 async function cmdChoke(args) {
@@ -223,42 +241,43 @@ async function cmdChoke(args) {
     process.exit(1);
   }
   const modelsData = loadModels();
-  const ledger = loadLedger(mission);
 
   // Find the target model
   const targetModel = modelsData.models.find(m => m.id === modelId);
   const targetPool = targetModel?.quota_pool;
-  
-  // Add target model
-  if (targetModel && !ledger.chokes.includes(targetModel.id)) {
-    ledger.chokes.push(targetModel.id);
-  }
-  
-  // If --pool flag is present and target has a quota_pool, add all models from same pool
-  if (pool && targetPool) {
-    const poolModels = modelsData.models.filter(m => m.quota_pool === targetPool);
-    for (const poolModel of poolModels) {
-      if (!ledger.chokes.includes(poolModel.id)) {
-        ledger.chokes.push(poolModel.id);
+
+  let handoverToRes;
+  withLock(mission, () => {
+    const l2 = loadLedger(mission);
+    // Add target model
+    if (targetModel && !l2.chokes.includes(targetModel.id)) {
+      l2.chokes.push(targetModel.id);
+    }
+    // If --pool flag is present and target has a quota_pool, add all models from same pool
+    if (pool && targetPool) {
+      const poolModels = modelsData.models.filter(m => m.quota_pool === targetPool);
+      for (const poolModel of poolModels) {
+        if (!l2.chokes.includes(poolModel.id)) {
+          l2.chokes.push(poolModel.id);
+        }
       }
     }
-  }
-
-  // Find handover from the target model (even if other pool models were added)
-  let handoverTo = null;
-  if (targetModel?.handover_to) {
-    for (const h of targetModel.handover_to) {
-      const hModel = modelsData.models.find(m => m.id === h);
-      if (hModel && isEligible(hModel, ledger, modelsData)) {
-        handoverTo = h;
-        break;
+    // Find handover from the target model
+    let ht = null;
+    if (targetModel?.handover_to) {
+      for (const h of targetModel.handover_to) {
+        const hModel = modelsData.models.find(m => m.id === h);
+        if (hModel && isEligible(hModel, l2, modelsData)) {
+          ht = h;
+          break;
+        }
       }
     }
-  }
-
-  ledger.handovers.push({ from: modelId, to: handoverTo, why });
-  saveLedger(mission, ledger);
-  console.log(JSON.stringify({ handover_to: handoverTo }));
+    l2.handovers.push({ from: modelId, to: ht, why });
+    saveLedger(mission, l2);
+    handoverToRes = ht;
+  });
+  console.log(JSON.stringify({ handover_to: handoverToRes }));
 }
 
 async function cmdStatus(args) {

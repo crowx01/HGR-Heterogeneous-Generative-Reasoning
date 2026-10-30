@@ -14,6 +14,7 @@ const DIR = process.env.CONFIG_DIR || '/home/kali/.config/delegate-skills';
 const ENVFILE = '/home/kali/.config/aider/providers.env';
 const NOPROBE = process.argv.includes('--no-probe');
 const DRY = process.argv.includes('--dry');
+const STATUS = process.argv.includes('--status');
 const PROMPT = 'Reply with the single word PONG';
 
 // ---- keys (parse env file; also honor process.env) ----
@@ -56,8 +57,8 @@ const NONCHAT = /embed|rerank|reward|guard|content-safety|-vision|vision-|lyria|
 const PAID = /insufficient|add credits|requires? (credit|payment|more credit)|payment required|billing|not available on your plan|upgrade your|purchase|out of credit|credit_balance|enterprise|paid plan|only available/i;
 const THROTTLE = /rate.?limit|too many|high demand|exhaust|resource.?exhausted|free_tier.*(limit|count).{0,20}0|exceeded your current quota|temporarily|overloaded/i;
 
-async function getJSON(url, headers, method = 'GET', body = null) {
-  try { const c = new AbortController(); const t = setTimeout(() => c.abort(), 22000);
+async function getJSON(url, headers, method = 'GET', body = null, timeoutMs = 22000) {
+  try { const c = new AbortController(); const t = setTimeout(() => c.abort(), timeoutMs);
     const r = await fetch(url, { method, headers: { 'content-type': 'application/json', ...headers }, body: body ? JSON.stringify(body) : undefined, signal: c.signal });
     clearTimeout(t); const txt = await r.text(); let j; try { j = JSON.parse(txt); } catch { j = null; }
     return { ok: r.ok, status: r.status, json: j, txt }; } catch (e) { return { ok: false, status: 0, txt: e.message }; }
@@ -73,6 +74,124 @@ function keep(status, text) {
   return false;                                                               // auth/other -> drop
 }
 const oaiProbe = (base, key, model) => getJSON(`${base}/chat/completions`, { authorization: `Bearer ${key}` }, 'POST', { model, messages: [{ role: 'user', content: PROMPT }], max_tokens: 8 });
+
+// ---- `--status`: cheap pool-availability scan (ONE generate-probe per POOL, parallel). ----
+// Short-circuits before the expensive per-model PONG loop; writes ONLY pool_status.json.
+if (STATUS) {
+  const EXHAUST = /resource.?exhausted|exceeded your current quota|free_tier.*(limit|count).{0,20}0|quota.*exceeded|insufficient_quota|daily limit|monthly limit|out of (credits|quota|tokens)|no (remaining|credits)|limit.{0,6}:\s*0/i;
+  const STATUS_ORD = { T1_deep: 0, T2_strong: 1, T3_code: 2, T4_grind: 3 };
+  const prev = fs.existsSync(`${DIR}/pool_status.json`) ? JSON.parse(fs.readFileSync(`${DIR}/pool_status.json`, 'utf8')) : { pools: {} };
+  const prevPools = prev.pools || {};
+
+  // Known-good models per pool from the last full re-tier: probe the TOP-intel one (the model routing
+  // most wants), so we (a) never false-DOWN on a bad list[0] pick and (b) catch per-model exhaustion
+  // (e.g. gemini-3.1-pro 429) that a lesser model would hide.
+  const mdlAll = (() => { try { return JSON.parse(fs.readFileSync(`${DIR}/models.json`, 'utf8')).models || []; } catch { return []; } })();
+  const fleetId = (pool, cli, raw) => {
+    if (pool === 'gemini_direct') return `${cli}/google/${raw}`;
+    if (pool === 'cohere_trial') return `${cli}/cohere/${raw}`;
+    if (String(raw).startsWith(cli + '/')) return raw;
+    return `${cli}/${raw}`;
+  };
+
+  // [pool, cli, listUrl, listHeaders, extractIds, toId(rawId)->apiModel, probe(apiModel,timeoutMs)]
+  const defs = [];
+  if (K.OPENROUTER_API_KEY) defs.push(['openrouter_free', 'opencode',
+    'https://openrouter.ai/api/v1/models', { authorization: `Bearer ${K.OPENROUTER_API_KEY}` },
+    j => (j.data || []).filter(m => /:free$/.test(m.id) || (m.pricing && +m.pricing.prompt === 0 && +m.pricing.completion === 0)).map(m => m.id),
+    id => id, (m, to) => oaiTimed('https://openrouter.ai/api/v1', K.OPENROUTER_API_KEY, m, to)]);
+  if (K.NVIDIA_NIM_API_KEY) defs.push(['nvidia_nim_free', 'aider',
+    'https://integrate.api.nvidia.com/v1/models', { authorization: `Bearer ${K.NVIDIA_NIM_API_KEY}` },
+    j => (j.data || []).map(m => 'nvidia_nim/' + m.id), id => id.replace(/^nvidia_nim\//, ''), (m, to) => oaiTimed('https://integrate.api.nvidia.com/v1', K.NVIDIA_NIM_API_KEY, m, to)]);
+  if (K.SAMBANOVA_API_KEY) defs.push(['sambanova_free', 'aider',
+    'https://api.sambanova.ai/v1/models', { authorization: `Bearer ${K.SAMBANOVA_API_KEY}` },
+    j => (j.data || []).map(m => 'sambanova/' + m.id), id => id.replace(/^sambanova\//, ''), (m, to) => oaiTimed('https://api.sambanova.ai/v1', K.SAMBANOVA_API_KEY, m, to)]);
+  if (K.COHERE_API_KEY) defs.push(['cohere_trial', 'opencode',
+    'https://api.cohere.com/v1/models?page_size=300', { authorization: `Bearer ${K.COHERE_API_KEY}` },
+    j => (j.models || []).filter(m => (m.endpoints || []).includes('chat')).map(m => m.name), id => id,
+    (m, to) => getJSON('https://api.cohere.com/v2/chat', { authorization: `Bearer ${K.COHERE_API_KEY}` }, 'POST', { model: m, messages: [{ role: 'user', content: PROMPT }] }, to)]);
+  if (K.GEMINI_API_KEY) defs.push(['gemini_direct', 'opencode',
+    `https://generativelanguage.googleapis.com/v1beta/models?key=${K.GEMINI_API_KEY}&pageSize=200`, {},
+    j => (j.models || []).filter(m => (m.supportedGenerationMethods || []).includes('generateContent')).map(m => m.name.replace(/^models\//, '')), id => id,
+    (m, to) => getJSON(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${K.GEMINI_API_KEY}`, {}, 'POST', { contents: [{ parts: [{ text: PROMPT }] }], generationConfig: { maxOutputTokens: 8 } }, to)]);
+  if (K.CLOUDFLARE_API_KEY && K.CLOUDFLARE_ACCOUNT_ID) defs.push(['cloudflare_free', 'aider',
+    `https://api.cloudflare.com/client/v4/accounts/${K.CLOUDFLARE_ACCOUNT_ID}/ai/models/search?per_page=200`, { authorization: `Bearer ${K.CLOUDFLARE_API_KEY}` },
+    j => (j.result || []).filter(m => m.task && /text.?generation/i.test(m.task.name || '')).map(m => 'cloudflare/' + m.name), id => id.replace(/^cloudflare\//, ''),
+    (m, to) => getJSON(`https://api.cloudflare.com/client/v4/accounts/${K.CLOUDFLARE_ACCOUNT_ID}/ai/run/${m}`, { authorization: `Bearer ${K.CLOUDFLARE_API_KEY}` }, 'POST', { messages: [{ role: 'user', content: PROMPT }] }, to)]);
+
+  function oaiTimed(base, key, model, to) { return getJSON(`${base}/chat/completions`, { authorization: `Bearer ${key}` }, 'POST', { model, messages: [{ role: 'user', content: PROMPT }], max_tokens: 8 }, to); }
+
+  const poolStatus = {};
+  // CLI-native pools (kilo/opencode/agy): liveness = their own CLI `models` list (token-free, no API
+  // probe). List OK -> reachable -> UP, EXCEPT keep a known quota-exhaustion (DOWN_429/EXHAUSTED) until
+  // its reset passes (a CLI list succeeds even when the account's dispatch quota is spent, e.g. agy).
+  // Always emit an entry so every model's pool is judgeable (fixes opencode_gateway being unroutable).
+  const CLI_POOLS = [
+    ['kilo_subscription', 'kilo models'],
+    ['opencode_gateway', 'opencode models'],
+    ['agy_antigravity', 'agy models'],
+  ];
+  for (const [p, cmd] of CLI_POOLS) {
+    const pv = prevPools[p] || {};
+    const baseNote = (pv.note || '').replace(/ \(cli-checked[^)]*\)/g, '');
+    let live = false;
+    try { live = (execSync(cmd, { encoding: 'utf8', timeout: 20000 }) || '').trim().length > 0; } catch {}
+    if (!live) { poolStatus[p] = { ...pv, status: 'DOWN', note: `${baseNote} (cli-checked: list failed)`.trim(), rank: pv.rank ?? 9, reset: pv.reset ?? null }; continue; }
+    const quotaHeld = (pv.status === 'DOWN_429' || pv.status === 'EXHAUSTED') && !!pv.reset && Date.parse(pv.reset) > Date.now();
+    poolStatus[p] = { ...pv, status: quotaHeld ? pv.status : 'UP', note: `${baseNote} (cli-checked: reachable${quotaHeld ? '; quota held' : ''})`.trim(), rank: pv.rank ?? 9, reset: quotaHeld ? pv.reset ?? null : null };
+  }
+
+  await Promise.all(defs.map(async ([pool, cli, listUrl, listHeaders, extract, toId, probe]) => {
+    const prevAvg = prevPools[pool]?.avg_latency_ms;
+    // Floor 10s: a tiny PONG to a large model (nemotron-550b) still cold-starts past 5s. Ceil 30s.
+    const timeoutMs = Math.min(30000, Math.max(10000, (typeof prevAvg === 'number' ? prevAvg : 12000) * 2));
+    const rank = prevPools[pool]?.rank ?? 9;
+    const lr = await getJSON(listUrl, listHeaders, 'GET', null, timeoutMs);
+    if (!lr.json) { poolStatus[pool] = { status: 'DOWN', note: `list err ${lr.status}`, rank, reset: null, avg_latency_ms: prevAvg ?? null }; return; }
+    const ids = extract(lr.json).filter(id => id && !NONCHAT.test(id));
+    if (!ids.length) { poolStatus[pool] = { status: 'DOWN', note: 'no chat models', rank, reset: null, avg_latency_ms: prevAvg ?? null }; return; }
+    // Probe the top-intel known-good model for this pool (fall back to first listed id).
+    const topIntel = mdlAll.filter(m => m.quota_pool === pool).sort((a, b) => b.intelligence - a.intelligence);
+    let probeRaw = ids[0];
+    for (const top of topIntel) { const hit = ids.find(r => fleetId(pool, cli, r) === top.id); if (hit) { probeRaw = hit; break; } }
+    const t0 = Date.now();
+    const pr = await probe(toId(probeRaw), timeoutMs);
+    const latency = Date.now() - t0;
+    const txt = pr.txt || '';
+    let status, reset = null, note = '';
+    if (pr.status === 200 && txt.trim()) { status = 'UP'; }
+    else if (pr.status === 429 && EXHAUST.test(txt)) {
+      status = 'EXHAUSTED';
+      const m = txt.match(/retryDelay"?\s*:\s*"?(\d+)s/i);
+      reset = m ? new Date(Date.now() + parseInt(m[1], 10) * 1000).toISOString() : null;
+      note = reset ? `quota exhausted; reset ${reset}` : 'quota exhausted';
+    }
+    else if (pr.status === 429 || pr.status === 503 || THROTTLE.test(txt)) { status = 'UP_THROTTLED'; note = `busy (${pr.status})`; }
+    else if (pr.status === 401 || pr.status === 403 || pr.status === 0) { status = 'DOWN'; note = `probe ${pr.status || 'neterr'}`; }
+    // list+auth OK but this model errored (404/400/5xx): pool is reachable -> keep usable, flag throttled
+    else { status = 'UP_THROTTLED'; note = `list ok, probe ${pr.status}`; }
+    // Only a real (200) inference updates the rolling latency; an error's fast/aborted time would
+    // poison the adaptive timeout downward and cause false DOWNs next run.
+    const avg_latency_ms = status === 'UP'
+      ? (typeof prevAvg === 'number' ? Math.round(prevAvg * 0.5 + latency * 0.5) : latency)
+      : (prevAvg ?? null);
+    poolStatus[pool] = { status, note, rank, reset, avg_latency_ms };
+  }));
+
+  // roster: read the EXISTING models.json (do not rebuild it under --status)
+  let roster = [];
+  try {
+    const mj = JSON.parse(fs.readFileSync(`${DIR}/models.json`, 'utf8'));
+    roster = (mj.models || []).map(m => ({ id: m.id, intel: m.intelligence, tier: m.tier, role: m.role, pool: m.quota_pool, pstatus: (poolStatus[m.quota_pool]?.status) || 'UNKNOWN', prank: poolStatus[m.quota_pool]?.rank ?? 9 }));
+    roster.sort((a, b) => (STATUS_ORD[a.tier] - STATUS_ORD[b.tier]) || (b.intel - a.intel) || a.id.localeCompare(b.id));
+  } catch {}
+
+  const out = { generated: new Date().toISOString(), pools: poolStatus, roster };
+  if (!DRY) fs.writeFileSync(`${DIR}/pool_status.json`, JSON.stringify(out, null, 2) + '\n');
+  const summary = Object.entries(poolStatus).map(([k, v]) => `${k}:${v.status}`).join(' ');
+  console.log(`STATUS SCAN${DRY ? ' (dry)' : ''} | ${summary}`);
+  process.exit(0);
+}
 
 // ---- enumerate + probe each keyed provider ----
 const pools = {};
